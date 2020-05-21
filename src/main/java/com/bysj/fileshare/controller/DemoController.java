@@ -25,16 +25,15 @@ import java.util.List;
  * @Copyright: 上海昱泓教育科技有限公司
  */
 @Api(tags = "【demo】")
-@RestController
+@Controller
 public class DemoController {
     @Autowired
     private DemoService demoService;
 
     @RequestMapping("/hello")
-    @ResponseBody
     public String  selectAll(){
       //  List<DemoVo> list = demoService.selectAll();
-        return "hello word";
+        return "/demo";
     }
 
 }
