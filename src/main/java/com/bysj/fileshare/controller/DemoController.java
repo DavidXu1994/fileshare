@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,16 +25,16 @@ import java.util.List;
  * @Copyright: 上海昱泓教育科技有限公司
  */
 @Api(tags = "【demo】")
-@Controller
+@RestController
 public class DemoController {
     @Autowired
     private DemoService demoService;
 
-    @RequestMapping("selectAll")
+    @RequestMapping("/hello")
     @ResponseBody
-    public List<DemoVo> selectAll(){
-        List<DemoVo> list = demoService.selectAll();
-        return list;
+    public String  selectAll(){
+      //  List<DemoVo> list = demoService.selectAll();
+        return "hello word";
     }
 
 }
