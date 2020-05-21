@@ -32,7 +32,7 @@ public class DemoController {
 
     @RequestMapping("/hello")
     public String  selectAll(){
-        //return   demoService.selectAll();
+       // return   demoService.selectAll();
         return "/demo";
     }
 

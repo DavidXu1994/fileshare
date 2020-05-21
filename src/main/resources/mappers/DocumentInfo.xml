@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此处与接口类地址对应 -->
+<mapper namespace="com.bysj.fileshare.mybatis.mapper.DocumentInfoMapper">
+
+    <!-- 此处与接口方法名对应 指定参数类型与返回结果类型-->
+    <resultMap id="queryFileListResult" type="com.bysj.fileshare.entity.vo.DocumentInfoVo" >
+        <id column="id" property="id"  />
+        <result column="document_name" property="documentName"  />
+        <result column="key_word" property="keyWord"  />
+        <result column="document_type" property="documentType"  />
+        <result column="document_url" property="documentUrl"  />
+    </resultMap>
+
+    <select id="queryFileList"  resultMap="queryFileListResult">
+        select * from bysj_document_info
+    </select>
+</mapper>

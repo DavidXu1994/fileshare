@@ -1,7 +1,9 @@
 package com.bysj.fileshare.service.impl;
 
 import com.bysj.fileshare.entity.vo.DemoVo;
+import com.bysj.fileshare.mybatis.mapper.DemoMapper;
 import com.bysj.fileshare.service.DemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,9 @@ import java.util.List;
  */
 @Service
 public class DemoServiceImpl implements DemoService {
+    @Autowired
+    DemoMapper demoMapper;
+
     @Override
     public List<DemoVo> selectAll() {
         return null;

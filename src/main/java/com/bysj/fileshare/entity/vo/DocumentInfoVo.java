@@ -1,4 +1,4 @@
-package com.bysj.fileshare.entity.po;
+package com.bysj.fileshare.entity.vo;
 
 import lombok.Data;
 
@@ -20,25 +20,14 @@ import lombok.Data;
  * 文档信息实体类
  */
 @Data
-public class DocumentInfo {
-    /**
-     * 主键
-     */
+public class DocumentInfoVo {
     private Long id;
-    /**
-     * 文档名
-     */
+
     private String documentName;
-    /**
-     * 关键词，可能多个，逗号分隔
-     */
+
     private String keyWord;
-    /**
-     * 文档类型 1.. 2.. 3.. 以此类推
-     */
+
     private Integer documentType;
-    /**
-     * 文件保存到服务器路径
-     */
+
     private String documentUrl;
 }

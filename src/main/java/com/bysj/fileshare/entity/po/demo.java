@@ -1,4 +1,4 @@
-package com.bysj.fileshare.entity;
+package com.bysj.fileshare.entity.po;
 
 /**
  * @ProjectName: fileshare

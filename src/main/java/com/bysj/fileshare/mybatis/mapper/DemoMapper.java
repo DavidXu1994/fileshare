@@ -1,4 +1,9 @@
-package com.bysj.fileshare.mapper;
+package com.bysj.fileshare.mybatis.mapper;
+
+
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @ProjectName: fileshare
@@ -13,5 +18,7 @@ package com.bysj.fileshare.mapper;
  * @Version: 1.0
  * @Copyright: 上海昱泓教育科技有限公司
  */
+@Mapper
 public interface DemoMapper {
+
 }
