@@ -16,4 +16,30 @@
     <select id="queryFileList"  resultMap="queryFileListResult">
         select * from bysj_document_info
     </select>
+
+
+
+    <insert id="addFileUpload" parameterType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
+    insert into bysj_document_info(id,document_name,key_word,document_type,document_url)
+    values(#{id},#{documentName},#{keyWord},#{documentType},#{documentUrl})
+  </insert>
+
+
+    <update id="editFileUpload" parameterType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
+        UPDATE bysj_document_info set document_name=#{documentName},key_word=#{keyWord},document_type=#{documentType} WHERE id=#{id}
+</update>
+
+
+   <!-- <select id="queryFileById"  parameterType="java.lang.Long" resultType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
+        select id,document_name as documentName,key_word as keyWord,document_type as documentType from bysj_document_info where id=#{id}
+    </select>-->
+    <select id="queryFileById"  parameterType="java.lang.Long" resultMap="queryFileListResult">
+        select * from bysj_document_info where id=#{id}
+    </select>
+
+
+
+    <delete id="deleteFileById" parameterType="java.lang.Long">
+        DELETE from bysj_document_info WHERE id=#{id}
+</delete>
 </mapper>

@@ -32,4 +32,24 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         List<DocumentInfoVo> ls= documentInfoMapper.queryFileList();
         return ls;
     }
+
+    @Override
+    public void addFileUpload(DocumentInfoVo documentInfoVo) {
+        documentInfoMapper.addFileUpload(documentInfoVo);
+    }
+
+    @Override
+    public void editFileUpload(DocumentInfoVo documentInfoVo) {
+        documentInfoMapper.editFileUpload(documentInfoVo);
+    }
+
+    @Override
+    public DocumentInfoVo queryFileById(Long id) {
+        return  documentInfoMapper.queryFileById(id);
+    }
+
+    @Override
+    public void deleteFileById(Long id) {
+        documentInfoMapper.deleteFileById(id);
+    }
 }

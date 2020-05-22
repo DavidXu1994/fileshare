@@ -28,4 +28,10 @@ public interface DocumentInfoMapper {
      */
    // @Select("select * from bysj_document_info" )
     List<DocumentInfoVo> queryFileList();
+
+    void addFileUpload(DocumentInfoVo documentInfoVo);
+    void editFileUpload(DocumentInfoVo documentInfoVo);
+    DocumentInfoVo queryFileById(Long id);
+    void deleteFileById(Long id);
+
 }

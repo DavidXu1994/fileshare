@@ -24,4 +24,17 @@ public interface DocumentInfoService {
      * @return
      */
     List<DocumentInfoVo> queryFileList();
+
+    /**
+     * 新增文档
+     * @param documentInfoVo
+     */
+     void addFileUpload(DocumentInfoVo documentInfoVo);
+
+    void editFileUpload(DocumentInfoVo documentInfoVo);
+
+    DocumentInfoVo queryFileById(Long id);
+
+    void deleteFileById(Long id);
+
 }

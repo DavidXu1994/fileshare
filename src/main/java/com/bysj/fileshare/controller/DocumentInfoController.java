@@ -1,15 +1,13 @@
 package com.bysj.fileshare.controller;
 
+import com.bysj.fileshare.config.ResponseResult;
 import com.bysj.fileshare.entity.vo.DocumentInfoVo;
 import com.bysj.fileshare.service.DocumentInfoService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ import java.util.List;
  * @Copyright: 上海昱泓教育科技有限公司
  */
 @Api(tags = "【文档操作】")
-@Controller
+@RestController
 public class DocumentInfoController {
     @Autowired
     DocumentInfoService documentInfoService;
@@ -37,17 +35,48 @@ public class DocumentInfoController {
      *
      * @return
      */
-    @PostMapping("/file/list/query")
-    public ModelAndView queryFileList(Model model) {
-        model.addAttribute("DocumentInfoVo", new DocumentInfoVo());
+    @GetMapping("/file/list/query")
+    @ApiOperation("查询文档列表")
+    public ResponseResult queryFileList() {
         List<DocumentInfoVo> ls=  documentInfoService.queryFileList();
-        ModelAndView mav = new ModelAndView("demo");
-        mav.addObject("list", ls);
-        return mav;
+        return ResponseResult.success(ls);
+    }
+
+
+    @PostMapping("/file/upload/add")
+    @ApiOperation("上传新增文档")
+    public ResponseResult addFileUpload(@RequestBody  DocumentInfoVo documentInfoVo) {
+         documentInfoService.addFileUpload(documentInfoVo);
+        return ResponseResult.success();
+    }
+
+    @PostMapping("/file/upload/edit")
+    @ApiOperation("编辑文档")
+    public ResponseResult editFileUpload(@RequestBody  DocumentInfoVo documentInfoVo) {
+        documentInfoService.editFileUpload(documentInfoVo);
+        return ResponseResult.success();
+    }
+
+
+    @GetMapping("/file/upload/byid/query")
+    @ApiOperation("查询单个文档")
+    public ResponseResult queryFileById(@RequestParam(value = "id") Long id) {
+       DocumentInfoVo ls=  documentInfoService.queryFileById(id);
+        return ResponseResult.success(ls);
+    }
+
+
+    @GetMapping("/file/upload/delete")
+    @ApiOperation("删除单个文档")
+    public ResponseResult deleteFileById(@RequestParam(value = "id") Long id) {
+       documentInfoService.deleteFileById(id);
+        return ResponseResult.success();
     }
 
     @GetMapping("/index/query")
-    public ModelAndView index() {
-        return new ModelAndView("index");
+    @ApiOperation("首页")
+    public ResponseResult index() {
+        //return new ModelAndView("index");
+        return ResponseResult.success();
     }
 }
