@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 此处与接口类地址对应 -->
+<mapper namespace="com.bysj.fileshare.mybatis.mapper.LoginMapper">
+
+    <!--注册 -->
+    <insert id="registerUser" parameterType="com.bysj.fileshare.entity.vo.UserInfoVo">
+    insert into bysj_user_info(id,user_name,password,email,state,type,create_time,is_deleted)
+    values(#{id},#{userName},#{password},#{email},#{state},#{type},#{createTime},#{isDeleted})
+  </insert>
+
+    <select id="queryFileById"  parameterType="java.lang.String" resultType="java.lang.String">
+        select password from bysj_user_info where user_Name=#{userName}
+    </select>
+
+</mapper>

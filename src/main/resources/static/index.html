@@ -1,0 +1,76 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<title>共享文档管理网站 </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ 
+<!-- Custom Theme files -->
+<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/snow.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+
+</head>
+<body>
+<div class="snow-container">
+			  <div class="snow foreground"></div>
+			  <div class="snow foreground layered"></div>
+			  <div class="snow middleground"></div>
+			  <div class="snow middleground layered"></div>
+			  <div class="snow background"></div>
+			  <div class="snow background layered"></div>
+			</div>
+
+<div class="top-buttons-agileinfo">
+<a href="index.html"  class="active">登录</a><a href="signup.html">注册</a>
+</div>
+<h1>共享文档管理系统</h1>
+<div class="main-agileits">
+<!--form-stars-here-->
+		<div class="form-w3-agile">
+			<h2 class="sub-agileits-w3layouts">登录系统</h2>
+			<form id="userLogin" method="post">
+					<input type="text" name="userName" placeholder="userName" required="" />
+					<input type="password" name="password" placeholder="password" required="" />
+					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
+				<div class="submit-w3l">
+                    <input type="submit" onclick="loginIn()" value="登录">
+				</div>
+				<p class="p-bottom-w3ls"><a href="signup.html">这里注册</a>如果你还没有一个账号.</p>
+			</form>
+		</div>
+		</div>
+<!--//form-ends-here-->
+<!-- copyright -->
+    <div class="copyright w3-agile">
+		<p> © 2020 文档共享系统 . All rights reserved | Design by Reserved</p>
+        </div>
+	<!-- //copyright --> 
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.serializejson.js"></script>
+
+</body>
+
+
+<script language="JavaScript" type="text/javascript">
+	function loginIn(){
+		console.log($('#userLogin').serializeJSON());
+		$.ajax({
+			type: "post",
+			url: "/user/login",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify($('#userLogin').serializeJSON()),
+			success: function (res) {
+				//跳转到登录页面
+
+			},
+			error: function (res) {
+				alert(res.message)
+				console.log(res);
+			}
+		});
+	}
+</script>
+</html>
