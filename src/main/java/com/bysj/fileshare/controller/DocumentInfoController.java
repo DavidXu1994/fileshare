@@ -37,8 +37,9 @@ public class DocumentInfoController {
      */
     @GetMapping("/file/list/query")
     @ApiOperation("查询文档列表")
-    public ResponseResult queryFileList() {
-        List<DocumentInfoVo> ls=  documentInfoService.queryFileList();
+    public ResponseResult queryFileList(@RequestParam(value = "searchWord")  String searchWord,
+                                        @RequestParam(value = "userName")  String userName) {
+        List<DocumentInfoVo> ls=  documentInfoService.queryFileList( userName ,searchWord);
         return ResponseResult.success(ls);
     }
 

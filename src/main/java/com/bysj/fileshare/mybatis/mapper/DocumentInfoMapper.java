@@ -27,7 +27,7 @@ public interface DocumentInfoMapper {
      * @return
      */
    // @Select("select * from bysj_document_info" )
-    List<DocumentInfoVo> queryFileList();
+    List<DocumentInfoVo> queryFileList(String searchWord);
 
     void addFileUpload(DocumentInfoVo documentInfoVo);
     void editFileUpload(DocumentInfoVo documentInfoVo);

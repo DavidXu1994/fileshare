@@ -21,6 +21,12 @@ import lombok.Data;
  */
 @Data
 public class DocumentInfo {
+    private Long createTime;
+    private Long updateTime;
+    /**
+     * 逻辑删除 0--未删除  1--删除
+     */
+    private Boolean isDeleted=false;
     /**
      * 主键
      */
@@ -41,4 +47,8 @@ public class DocumentInfo {
      * 文件保存到服务器路径
      */
     private String documentUrl;
+    /**
+     * 上传人
+     */
+    private String userName;
 }

@@ -21,6 +21,12 @@ import lombok.Data;
  */
 @Data
 public class DocumentInfoVo {
+    private Long createTime;
+    private Long updateTime;
+    /**
+     * 逻辑删除 0--未删除  1--删除
+     */
+    private Boolean isDeleted=false;
     private Long id;
 
     private String documentName;
@@ -30,4 +36,10 @@ public class DocumentInfoVo {
     private Integer documentType;
 
     private String documentUrl;
+    /**
+     * 上传人
+     */
+    private String userName;
+
+    private Boolean isOneSelf;
 }

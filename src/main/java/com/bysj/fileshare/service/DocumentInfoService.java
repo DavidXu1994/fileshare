@@ -23,7 +23,7 @@ public interface DocumentInfoService {
      * 查询文档列表
      * @return
      */
-    List<DocumentInfoVo> queryFileList();
+    List<DocumentInfoVo> queryFileList(String userName ,String searchWord);
 
     /**
      * 新增文档

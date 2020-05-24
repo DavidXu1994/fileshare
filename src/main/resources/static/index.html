@@ -9,7 +9,7 @@
 <!-- Custom Theme files -->
 <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
 <link href="css/snow.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/styleLogin.css" rel="stylesheet" type="text/css" media="all" />
 <!-- //Custom Theme files -->
 
 </head>
@@ -36,7 +36,7 @@
 					<input type="password" name="password" placeholder="password" required="" />
 					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
 				<div class="submit-w3l">
-                    <input type="submit" onclick="loginIn()" value="登录">
+                    <input type="submitButton" onclick="loginIn()" value="登录">
 				</div>
 				<p class="p-bottom-w3ls"><a href="signup.html">这里注册</a>如果你还没有一个账号.</p>
 			</form>
@@ -45,7 +45,7 @@
 <!--//form-ends-here-->
 <!-- copyright -->
     <div class="copyright w3-agile">
-		<p> © 2020 文档共享系统 . All rights reserved | Design by Reserved</p>
+		<p> © 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com</p>
         </div>
 	<!-- //copyright --> 
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
@@ -61,14 +61,16 @@
 			type: "post",
 			url: "/user/login",
 			contentType: "application/json; charset=utf-8",
+			dataType: "json",
 			data: JSON.stringify($('#userLogin').serializeJSON()),
 			success: function (res) {
+				//alert(res);
 				//跳转到登录页面
-
+				$(window).attr("location","home_page.html")
 			},
-			error: function (res) {
-				alert(res.message)
-				console.log(res);
+			error: function (jqXHR, textStatus, errorThrown) {
+
+				console.log(data.message);
 			}
 		});
 	}

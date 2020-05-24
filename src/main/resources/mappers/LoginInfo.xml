@@ -10,7 +10,7 @@
     values(#{id},#{userName},#{password},#{email},#{state},#{type},#{createTime},#{isDeleted})
   </insert>
 
-    <select id="queryFileById"  parameterType="java.lang.String" resultType="java.lang.String">
+    <select id="queryByUserName"  parameterType="java.lang.String" resultType="java.lang.String">
         select password from bysj_user_info where user_Name=#{userName}
     </select>
 

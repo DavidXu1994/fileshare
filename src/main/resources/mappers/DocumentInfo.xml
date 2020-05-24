@@ -11,17 +11,20 @@
         <result column="key_word" property="keyWord"  />
         <result column="document_type" property="documentType"  />
         <result column="document_url" property="documentUrl"  />
+        <result column="create_time" property="createTime"  />
+        <result column="update_time" property="updateTime"  />
+        <result column="user_name" property="userName"  />
     </resultMap>
 
-    <select id="queryFileList"  resultMap="queryFileListResult">
-        select * from bysj_document_info
+    <select id="queryFileList" parameterType="java.lang.String" resultMap="queryFileListResult">
+        select * from bysj_document_info where is_deleted=0 and  document_name like concat('%',#{searchWord},'%') or key_word like concat('%',#{searchWord},'%')
     </select>
 
 
 
     <insert id="addFileUpload" parameterType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
-    insert into bysj_document_info(id,document_name,key_word,document_type,document_url)
-    values(#{id},#{documentName},#{keyWord},#{documentType},#{documentUrl})
+    insert into bysj_document_info(id,document_name,key_word,document_type,document_url,create_time,update_time,user_name)
+    values(#{id},#{documentName},#{keyWord},#{documentType},#{documentUrl},#{createTime},#{updateTime},#{userName})
   </insert>
 
 
@@ -34,12 +37,15 @@
         select id,document_name as documentName,key_word as keyWord,document_type as documentType from bysj_document_info where id=#{id}
     </select>-->
     <select id="queryFileById"  parameterType="java.lang.Long" resultMap="queryFileListResult">
-        select * from bysj_document_info where id=#{id}
+        select * from bysj_document_info where is_deleted=0 and  id=#{id}
     </select>
 
 
 
-    <delete id="deleteFileById" parameterType="java.lang.Long">
+   <!-- <delete id="deleteFileById" parameterType="java.lang.Long">
         DELETE from bysj_document_info WHERE id=#{id}
-</delete>
+</delete>-->
+    <update id="deleteFileById" >
+        UPDATE  bysj_document_info set is_deleted=0
+</update>
 </mapper>

@@ -28,18 +28,29 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
      private DocumentInfoMapper documentInfoMapper;
 
     @Override
-    public List<DocumentInfoVo> queryFileList() {
-        List<DocumentInfoVo> ls= documentInfoMapper.queryFileList();
+    public List<DocumentInfoVo> queryFileList( String userName ,String searchWord) {
+        List<DocumentInfoVo> ls= documentInfoMapper.queryFileList(searchWord);
+        for(DocumentInfoVo documentInfoVo:ls){
+            if(userName.equals(documentInfoVo.getUserName())){
+                //判断是否本人
+                documentInfoVo.setIsOneSelf(true);
+            }else{
+                documentInfoVo.setIsOneSelf(false);
+            }
+        }
         return ls;
     }
 
     @Override
     public void addFileUpload(DocumentInfoVo documentInfoVo) {
+        documentInfoVo.setCreateTime(System.currentTimeMillis());
+        documentInfoVo.setIsDeleted(false);
         documentInfoMapper.addFileUpload(documentInfoVo);
     }
 
     @Override
     public void editFileUpload(DocumentInfoVo documentInfoVo) {
+        documentInfoVo.setUpdateTime(System.currentTimeMillis());
         documentInfoMapper.editFileUpload(documentInfoVo);
     }
 
