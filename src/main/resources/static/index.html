@@ -33,7 +33,7 @@
 			<h2 class="sub-agileits-w3layouts">登录系统</h2>
 			<form id="userLogin" method="post">
 					<input type="text" name="userName" placeholder="userName" required="" />
-					<input type="password" name="password" placeholder="password" required="" />
+					<input type="password" name="password" placeholder="password" required="" autocomplete="off"/>
 					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
 				<div class="submit-w3l">
                     <input type="submitButton" onclick="loginIn()" value="登录">
@@ -64,13 +64,12 @@
 			dataType: "json",
 			data: JSON.stringify($('#userLogin').serializeJSON()),
 			success: function (res) {
-				//alert(res);
-				//跳转到登录页面
+				//跳转到后台首页页面
 				$(window).attr("location","home_page.html")
 			},
-			error: function (jqXHR, textStatus, errorThrown) {
-
-				console.log(data.message);
+			error: function (res) {
+				let json=JSON.parse(res.responseText);
+				alert(json.message);
 			}
 		});
 	}

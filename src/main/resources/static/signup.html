@@ -30,10 +30,10 @@
         <div class="form-w3-agile">
             <h2 class="sub-agileits-w3layouts">注册</h2>
             <form  id="userSubmit" method="post">
-                <input type="text" name="userName" placeholder="用户名" required="" />
-                <input type="password" name="password" placeholder="密码" required="" />
-                <input type="password" name="passwordAgain" placeholder="确认密码" required="" />
-                <input type="email" name="email" placeholder="邮箱" required="" />
+                <input type="text" name="userName" placeholder="用户名" required="" autocomplete="off"/>
+                <input type="password" name="password" placeholder="密码" required="" autocomplete="off"/>
+                <input type="password" name="passwordAgain" placeholder="确认密码" required="" autocomplete="off"/>
+                <input type="email" name="email" placeholder="邮箱" required="" autocomplete="off"/>
                 <div class="submit-w3l"  >
                     <input type="submitButton"  onclick="registerUser()" value="注册">
                 </div>
@@ -52,20 +52,23 @@
 
 
 <script language="JavaScript" type="text/javascript">
-    function registerUser(){
+    function registerUser() {
+        $('#userSubmit').serializeJSON();
         console.log($('#userSubmit').serializeJSON());
         $.ajax({
-        type: "post",
-        url: "/user/register",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify($('#userSubmit').serializeJSON()),
+            type: "post",
+            url: "/user/register",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify($('#userSubmit').serializeJSON()),
+            dataType: "text",
             success: function (res) {
-               //跳转到登录页面
-
+                alert("注册成功");
+                //跳转到登录页面
+                 $(window).attr("location","/index.html")
             },
             error: function (res) {
-            alert(res.message)
-                console.log(res);
+                let json=JSON.parse(res.responseText);
+                alert(json.message);
             }
         });
     }

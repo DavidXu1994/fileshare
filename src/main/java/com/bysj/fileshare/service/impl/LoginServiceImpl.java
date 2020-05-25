@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.StringUtils;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
@@ -37,11 +38,19 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public void registerUser(UserInfoVo userInfoVo) {
+        if (StringUtils.isEmpty(userInfoVo.getUserName()) || StringUtils.isEmpty(userInfoVo.getPassword())
+                || StringUtils.isEmpty(userInfoVo.getEmail()) || StringUtils.isEmpty(userInfoVo.getPasswordAgain())) {
+            throw new RuntimeException("表单信息不得为空！");
+        }
+        //判断用户名是否存在，查库
+        String userName = loginMapper.queryUserNameExit(userInfoVo.getUserName());
+        if (!StringUtils.isEmpty(userName)) {
+            throw new RuntimeException("此用户名已存在！");
+        }
+
         //判断密码是否相同
         if (userInfoVo.getPassword().equals(userInfoVo.getPasswordAgain())) {
-            /**
-             * todo 判断用户名是否存在
-             */
+
             //转码
             String pwd = encodePassword(userInfoVo.getPassword());
             userInfoVo.setPassword(pwd);
@@ -54,17 +63,20 @@ public class LoginServiceImpl implements LoginService {
             userInfoVo.setCreateTime(System.currentTimeMillis());
             userInfoVo.setIsDeleted(false);
         } else {
-            throw new RuntimeException("2次输入密码不一致");
+            throw new RuntimeException("2次输入密码不一致！");
         }
         loginMapper.registerUser(userInfoVo);
     }
 
     @Override
     public void userLogin(UserInfoVo userInfoVo) {
+        if (StringUtils.isEmpty(userInfoVo.getUserName()) || StringUtils.isEmpty(userInfoVo.getPassword())) {
+            throw new RuntimeException("用户名密码不得为空！");
+        }
         String password = loginMapper.queryByUserName(userInfoVo.getUserName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (!encoder.matches(userInfoVo.getPassword(),password)) {
-            throw new RuntimeException("密码错误");
+        if (!encoder.matches(userInfoVo.getPassword(), password)) {
+            throw new RuntimeException("用户名密码不匹配，请检查！");
         }
     }
 

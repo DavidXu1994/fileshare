@@ -19,5 +19,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoginMapper {
     void registerUser(UserInfoVo userInfoVo);
-    String queryByUserName(String userName );
+
+    String queryByUserName(String userName);
+
+    String queryUserNameExit(String userName);
 }

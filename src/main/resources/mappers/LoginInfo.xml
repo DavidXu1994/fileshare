@@ -11,7 +11,10 @@
   </insert>
 
     <select id="queryByUserName"  parameterType="java.lang.String" resultType="java.lang.String">
-        select password from bysj_user_info where user_Name=#{userName}
+        select password from bysj_user_info where user_name=#{userName}
+    </select>
+    <select id="queryUserNameExit"  parameterType="java.lang.String" resultType="java.lang.String">
+        select user_name from bysj_user_info where user_name=#{userName}
     </select>
 
 </mapper>
