@@ -1,6 +1,7 @@
 package com.bysj.fileshare.service;
 
 import com.bysj.fileshare.entity.vo.DocumentInfoVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -27,9 +28,9 @@ public interface DocumentInfoService {
 
     /**
      * 新增文档
-     * @param documentInfoVo
+     * @param
      */
-     void addFileUpload(DocumentInfoVo documentInfoVo);
+     void addFileUpload(MultipartFile file);
 
     void editFileUpload(DocumentInfoVo documentInfoVo);
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @ProjectName: fileshare
  * @Package: com.bysj.fileshare.controller
@@ -40,8 +42,8 @@ public class LoginController {
 
     @ApiOperation("用户登录")
     @PostMapping(value = "/user/login")
-    public ResponseResult userLogin( @RequestBody UserInfoVo userInfoVo) {
-        loginService.userLogin(userInfoVo);
+    public ResponseResult userLogin(HttpSession session, @RequestBody UserInfoVo userInfoVo) {
+        loginService.userLogin(session,userInfoVo);
         return ResponseResult.success();
     }
 }

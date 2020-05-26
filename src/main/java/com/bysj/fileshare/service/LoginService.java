@@ -2,6 +2,8 @@ package com.bysj.fileshare.service;
 
 import com.bysj.fileshare.entity.vo.UserInfoVo;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * @ProjectName: fileshare
  * @Package: com.bysj.fileshare.service
@@ -18,6 +20,6 @@ import com.bysj.fileshare.entity.vo.UserInfoVo;
 public interface LoginService {
 
     void registerUser(UserInfoVo userInfoVo);
-    void userLogin(UserInfoVo userInfoVo);
+    void userLogin(HttpSession session,UserInfoVo userInfoVo);
 
 }

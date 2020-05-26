@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -46,9 +47,11 @@ public class DocumentInfoController {
 
     @PostMapping("/file/upload/add")
     @ApiOperation("上传新增文档")
-    public ResponseResult addFileUpload(@RequestBody  DocumentInfoVo documentInfoVo) {
-         documentInfoService.addFileUpload(documentInfoVo);
+    public ResponseResult addFileUpload(@RequestParam(value = "documentUrl")   MultipartFile file,
+                                        @RequestParam(value = "userName")   String userName ) {
+         documentInfoService.addFileUpload(file);
         return ResponseResult.success();
+        //@RequestBody  DocumentInfoVo documentInfoVo
     }
 
     @PostMapping("/file/upload/edit")

@@ -13,6 +13,8 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
@@ -69,7 +71,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public void userLogin(UserInfoVo userInfoVo) {
+    public void userLogin(HttpSession session,UserInfoVo userInfoVo) {
         if (StringUtils.isEmpty(userInfoVo.getUserName()) || StringUtils.isEmpty(userInfoVo.getPassword())) {
             throw new RuntimeException("用户名密码不得为空！");
         }
@@ -78,6 +80,9 @@ public class LoginServiceImpl implements LoginService {
         if (!encoder.matches(userInfoVo.getPassword(), password)) {
             throw new RuntimeException("用户名密码不匹配，请检查！");
         }
+        //如果用户登录成功，设置session
+
+        session.setAttribute("userName",userInfoVo.getUserName());
     }
 
     /**
