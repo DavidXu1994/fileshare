@@ -3,6 +3,7 @@ package com.bysj.fileshare.service;
 import com.bysj.fileshare.entity.vo.DocumentInfoVo;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -30,12 +31,14 @@ public interface DocumentInfoService {
      * 新增文档
      * @param
      */
-     void addFileUpload(MultipartFile file);
+     void addFileUpload(MultipartFile file,String userName,String documentName,String keyWord, Integer documentType);
 
     void editFileUpload(DocumentInfoVo documentInfoVo);
 
     DocumentInfoVo queryFileById(Long id);
 
     void deleteFileById(Long id);
+    void downloadFileById(HttpServletResponse response, Long id);
+
 
 }

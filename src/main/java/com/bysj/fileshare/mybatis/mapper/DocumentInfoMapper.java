@@ -24,14 +24,18 @@ public interface DocumentInfoMapper {
 
     /**
      * 查询数据库文档记录
+     *
      * @return
      */
-   // @Select("select * from bysj_document_info" )
+    // @Select("select * from bysj_document_info" )
     List<DocumentInfoVo> queryFileList(String searchWord);
 
     void addFileUpload(DocumentInfoVo documentInfoVo);
+
     void editFileUpload(DocumentInfoVo documentInfoVo);
+
     DocumentInfoVo queryFileById(Long id);
-    void deleteFileById(Long id);
+
+    void deleteFileById(Long updateTime ,Long id);
 
 }

@@ -40,6 +40,8 @@ public class DocumentInfoVo {
      * 上传人
      */
     private String userName;
-
+    /**
+     * 是否本人
+     */
     private Boolean isOneSelf;
 }

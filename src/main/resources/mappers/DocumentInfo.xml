@@ -14,17 +14,18 @@
         <result column="create_time" property="createTime"  />
         <result column="update_time" property="updateTime"  />
         <result column="user_name" property="userName"  />
+        <result column="is_deleted" property="isDeleted"  />
     </resultMap>
 
     <select id="queryFileList" parameterType="java.lang.String" resultMap="queryFileListResult">
-        select * from bysj_document_info where is_deleted=0 and  document_name like concat('%',#{searchWord},'%') or key_word like concat('%',#{searchWord},'%')
+        select * from bysj_document_info where is_deleted=0 and  (document_name like concat('%',#{searchWord},'%') or key_word like concat('%',#{searchWord},'%'))
     </select>
 
 
 
     <insert id="addFileUpload" parameterType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
-    insert into bysj_document_info(id,document_name,key_word,document_type,document_url,create_time,update_time,user_name)
-    values(#{id},#{documentName},#{keyWord},#{documentType},#{documentUrl},#{createTime},#{updateTime},#{userName})
+    insert into bysj_document_info(id,document_name,key_word,document_type,document_url,create_time,update_time,user_name,is_deleted)
+    values(#{id},#{documentName},#{keyWord},#{documentType},#{documentUrl},#{createTime},#{updateTime},#{userName},#{isDeleted})
   </insert>
 
 
@@ -46,6 +47,6 @@
         DELETE from bysj_document_info WHERE id=#{id}
 </delete>-->
     <update id="deleteFileById" >
-        UPDATE  bysj_document_info set is_deleted=0
+        UPDATE  bysj_document_info set is_deleted=1,update_time=#{updateTime} WHERE id=#{id}
 </update>
 </mapper>

@@ -285,34 +285,46 @@
 
 <script type="text/javascript">
   $('#external_button').click(function () {
-
     doUpload();
   });
 
   function doUpload(){
-    let formData=new FormData();
-    formData.append("documentUrl",document.getElementById("example-file-input").files[0]);
-    formData.append("userName","xdw");//也可以传递其他字段
+    let formData = new FormData();
+    let userName="xdw";
+    let keyWord=document.getElementById("example-email-input").value;
+    let documentName=document.getElementById("example-text-input").value;
+    let documentType=document.getElementById("example-select").value;
 
+    formData.append("documentUrl", document.getElementById("example-file-input").files[0]);
+    formData.append("userName", userName);
+    formData.append("documentName", documentName);
+    formData.append("keyWord", keyWord);
+    formData.append("documentType", documentType);
 
-    $.ajax({
-      type:"post",
-      url:" /file/upload/add",
-      data:formData,
-      contentType: false,
-      processData: false,
-      dataType:"json",
-      success:function(res){
-        alert("上传成功！");
-        //页面跳转
-        $(window).attr("location","file_list.html")
-      },
-      error:function (msg) {
-      }
-    });
+    if (userName == "") {
+      alert("用户名不得为空");
+    } else if (documentName == "") {
+      alert("文档名不得为空");
+    }else {
 
-
-
+      $.ajax({
+        type: "post",
+        url: " /file/upload/add",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (res) {
+          alert("上传成功！");
+          //页面跳转
+          $(window).attr("location", "file_list.html")
+        },
+        error: function (res) {
+          let json = JSON.parse(res.responseText);
+          alert(json.message);
+        }
+      });
+    }
   }
 
 

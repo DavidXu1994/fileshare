@@ -4,11 +4,16 @@ import com.bysj.fileshare.entity.vo.DocumentInfoVo;
 import com.bysj.fileshare.mybatis.mapper.DocumentInfoMapper;
 import com.bysj.fileshare.service.DocumentInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -46,13 +51,29 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
     }
 
     @Override
-    public void addFileUpload(MultipartFile file) {
+    public void addFileUpload(MultipartFile file, String userName, String documentName, String keyWord, Integer documentType) {
         //文档上传，读取目标文件上传到服务器
-        fileUpload( file);
+        if(StringUtils.isEmpty(userName)||StringUtils.isEmpty(userName)||StringUtils.isEmpty(userName)||StringUtils.isEmpty(userName))  {
+            throw new RuntimeException("表单信息不得为空！");
+        }
+        String path="";
+        try {
+             path=  fileUpload( file);
+        }catch (Exception e){
+            throw new RuntimeException("文件上传失败，请重试！");
+        }
 
-        //documentInfoVo.setCreateTime(System.currentTimeMillis());
-       // documentInfoVo.setIsDeleted(false);
-       // documentInfoMapper.addFileUpload(documentInfoVo);
+        //数据库保存信息
+        DocumentInfoVo documentInfoVo=new DocumentInfoVo();
+        documentInfoVo.setUserName(userName);
+        documentInfoVo.setDocumentName(documentName);
+        documentInfoVo.setDocumentType(documentType);
+        documentInfoVo.setDocumentUrl(path);
+        documentInfoVo.setKeyWord(keyWord);
+        documentInfoVo.setIsDeleted(false);
+        documentInfoVo.setCreateTime(System.currentTimeMillis());
+        documentInfoMapper.addFileUpload( documentInfoVo);
+
     }
 
     @Override
@@ -68,16 +89,77 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
 
     @Override
     public void deleteFileById(Long id) {
-        documentInfoMapper.deleteFileById(id);
+        Long updateTime=System.currentTimeMillis();
+        documentInfoMapper.deleteFileById(updateTime,id);
+    }
+
+    @Override
+    public void downloadFileById(HttpServletResponse response, Long id) {
+        DocumentInfoVo dto=  documentInfoMapper.queryFileById(id);
+
+        try {
+            downloadFile(dto.getDocumentUrl(),response,dto.getDocumentName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void downloadFile(String filePath, HttpServletResponse response,String fileName ) throws Exception {
+        File file = new File(filePath);
+        if (file.exists()) {
+            response.setContentType("application/force-download");// 设置强制下载不打开
+            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            OutputStream outputStream = null;
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                outputStream = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    outputStream.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+                outputStream.flush();
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (outputStream != null) {
+                    try {
+                        outputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
     /**
-     * 文件上传
+     * 文件上传，返回服务器路径
      */
-    public  void fileUpload (MultipartFile file) {
+    public   String fileUpload (MultipartFile file) {
         // 先设定一个放置上传文件的文件夹(该文件夹可以不存在，下面会判断创建)
-        String deposeFilesDir = "/Users/davidxu/Desktop/testfile/";
-        // 判断文件手否有内容
+        String deposeFilesDir=File.separator+"Users"+File.separator+"davidxu"+File.separator+"Desktop"+File.separator+"testfile"+File.separator;
+//        String deposeFilesDir=File.separator+"upload"+File.separator+"files"+File.separator;
+        // 判断文件是否有内容
         if (file.isEmpty()) {
             System.out.println("该文件无任何内容!!!");
         }
@@ -119,13 +201,12 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
             // 将获取到的附件file,transferTo写入到指定的位置(即:创建dest时，指定的路径)
             file.transferTo(dest);
         } catch (IllegalStateException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("文件的全路径名字(含路径、后缀)>>>>>>>" + deposeFilesDir + fileName);
+        return deposeFilesDir + fileName;
+       // System.out.println("文件的全路径名字(含路径、后缀)>>>>>>>" + deposeFilesDir + fileName);
     }
 
 

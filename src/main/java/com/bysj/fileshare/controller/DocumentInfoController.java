@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -48,8 +49,12 @@ public class DocumentInfoController {
     @PostMapping("/file/upload/add")
     @ApiOperation("上传新增文档")
     public ResponseResult addFileUpload(@RequestParam(value = "documentUrl")   MultipartFile file,
-                                        @RequestParam(value = "userName")   String userName ) {
-         documentInfoService.addFileUpload(file);
+                                        @RequestParam(value = "userName")   String userName,
+                                        @RequestParam(value = "documentName")   String documentName,
+                                        @RequestParam(value = "keyWord")   String keyWord,
+                                        @RequestParam(value = "documentType")   Integer documentType
+    ) {
+         documentInfoService.addFileUpload(file,userName,documentName,keyWord,documentType);
         return ResponseResult.success();
         //@RequestBody  DocumentInfoVo documentInfoVo
     }
@@ -76,6 +81,13 @@ public class DocumentInfoController {
        documentInfoService.deleteFileById(id);
         return ResponseResult.success();
     }
+    @GetMapping("/file/down/load")
+    @ApiOperation("下载文档")
+    public void downloadFileById(HttpServletResponse response, @RequestParam(value = "id") Long id) {
+        documentInfoService.downloadFileById(response,id);
+       // return ResponseResult.success();
+    }
+
 
     @GetMapping("/index/query")
     @ApiOperation("首页")
