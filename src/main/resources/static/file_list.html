@@ -240,6 +240,9 @@
                                 <a class="btn btn-primary m-r-5" href="file_upload.html"><i class="mdi mdi-plus"></i>
                                     上传文档</a>
                             </div>
+                            <div class="toolbar-btn-action">
+                                <button type="button" class="btn btn-primary" onclick="test()">按钮</button>
+                            </div>
                         </div>
                         <div class="card-body">
 
@@ -256,20 +259,6 @@
                                     </tr>
                                     </thead>
                                     <tbody id="tableFileList">
-                                    <!--<tr>
-
-
-                                      <td>
-                                        <div class="btn-group">
-                                          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal" >编辑</button>
-                                          <button type="button" class="btn" onclick="previewFile()" >预览</button>
-                                          <button type="button" class="btn" onclick="previewFile()" >下载</button>
-                                          <button type="button" class="btn" onclick="deleteFile()" >删除</button>
-                                          </div>
-                                      </td>
-                                    </tr>-->
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -421,6 +410,10 @@
 
       }
 
+    }
+
+    function test(){
+        window.location.href="/file/online/query";
     }
 
 

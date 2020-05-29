@@ -1,279 +1,282 @@
 ﻿<!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>文档上传 - 文档共享管理系统</title>
-<link rel="icon" href="favicon.ico" type="image/ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <title>文档上传 - 文档共享管理系统</title>
+    <link rel="icon" href="favicon.ico" type="image/ico">
 
 
-<meta name="author" content="yinqi">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/materialdesignicons.min.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
+    <meta name="author" content="yinqi">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
-  
+
 <body data-logobg="color_8" data-sidebarbg="color_8">
 <div class="layout-web">
-  <div class="layout-container">
-    <!--左侧导航-->
-    <aside class="layout-sidebar">
-       
-      <!-- logo -->
-      <div id="logo" class="sidebar-header">
-        <a href="home_page.html"><img src="images/logo-sidebar.png" title="" alt="" /></a>
-      </div>
-      <div class="layout-sidebar-scroll">
-        
-        <nav class="sidebar-main">
-          <ul class="nav nav-drawer">
-            <li class="nav-item"> <a href="home_page.html"><i class="mdi mdi-home"></i> 后台首页</a> </li>
-            <li class="nav-item nav-item-has-subnav">
-              <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 文档管理</a>
-              <ul class="nav nav-subnav">
-                <li> <a href="file_list.html">文档列表</a> </li>
-              </ul>
-              <ul class="nav nav-subnav">
-                <li> <a href="file_upload.html">文档上传</a> </li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
+    <div class="layout-container">
+        <!--左侧导航-->
+        <aside class="layout-sidebar">
 
-        <div class="sidebar-footer">
-          <p class="copyright">© 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com </p>
-        </div>
-      </div>
-      
-    </aside>
-    <!--End 左侧导航-->
-    
-    <!--头部信息-->
-    <header class="layout-header">
-      
-      <nav class="navbar navbar-default">
-        <div class="topbar">
-          
-          <div class="topbar-left">
-            <div class="aside-toggler">
-              <span class="toggler-bar"></span>
-              <span class="toggler-bar"></span>
-              <span class="toggler-bar"></span>
+            <!-- logo -->
+            <div id="logo" class="sidebar-header">
+                <a href="home_page.html"><img src="images/logo-sidebar.png" title="" alt=""/></a>
             </div>
-            <span class="navbar-page-title"> 文档上传 </span>
-          </div>
-          
-          <ul class="topbar-right">
-            <li class="dropdown dropdown-profile">
-              <a href="javascript:void(0)" data-toggle="dropdown">
-                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员" />
-                <span>管理员 <span class="caret"></span></span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li> <a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>
-                <li> <a href="pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
-                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
-                <li class="divider"></li>
-                <li> <a href="pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
-              </ul>
-            </li>
-            <!--切换主题配色-->
-		    <li class="dropdown dropdown-skin">
-			  <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
-			  <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
-                <li class="drop-title"><p>主题</p></li>
-                <li class="drop-skin-li clearfix">
+            <div class="layout-sidebar-scroll">
+
+                <nav class="sidebar-main">
+                    <ul class="nav nav-drawer">
+                        <li class="nav-item"><a href="home_page.html"><i class="mdi mdi-home"></i> 后台首页</a></li>
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="javascript:void(0)"><i class="mdi mdi-file-outline"></i> 文档管理</a>
+                            <ul class="nav nav-subnav">
+                                <li><a href="file_list.html">文档列表</a></li>
+                            </ul>
+                            <ul class="nav nav-subnav">
+                                <li><a href="file_upload.html">文档上传</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <p class="copyright">© 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com </p>
+                </div>
+            </div>
+
+        </aside>
+        <!--End 左侧导航-->
+
+        <!--头部信息-->
+        <header class="layout-header">
+
+            <nav class="navbar navbar-default">
+                <div class="topbar">
+
+                    <div class="topbar-left">
+                        <div class="aside-toggler">
+                            <span class="toggler-bar"></span>
+                            <span class="toggler-bar"></span>
+                            <span class="toggler-bar"></span>
+                        </div>
+                        <span class="navbar-page-title"> 文档上传 </span>
+                    </div>
+
+                    <ul class="topbar-right">
+                        <li class="dropdown dropdown-profile">
+                            <a href="javascript:void(0)" data-toggle="dropdown">
+                                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员"/>
+                                <span>管理员 <span class="caret"></span></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a></li>
+                                <li><a href="pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a></li>
+                                <li><a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
+                                <li class="divider"></li>
+                                <li><a href="pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a></li>
+                            </ul>
+                        </li>
+                        <!--切换主题配色-->
+                        <li class="dropdown dropdown-skin">
+                            <span data-toggle="dropdown" class="icon-palette"><i class="mdi mdi-palette"></i></span>
+                            <ul class="dropdown-menu dropdown-menu-right" data-stopPropagation="true">
+                                <li class="drop-title"><p>主题</p></li>
+                                <li class="drop-skin-li clearfix">
                   <span class="inverse">
                     <input type="radio" name="site_theme" value="default" id="site_theme_1" checked>
                     <label for="site_theme_1"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="site_theme" value="dark" id="site_theme_2">
                     <label for="site_theme_2"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="site_theme" value="translucent" id="site_theme_3">
                     <label for="site_theme_3"></label>
                   </span>
-                </li>
-			    <li class="drop-title"><p>LOGO</p></li>
-				<li class="drop-skin-li clearfix">
+                                </li>
+                                <li class="drop-title"><p>LOGO</p></li>
+                                <li class="drop-skin-li clearfix">
                   <span class="inverse">
                     <input type="radio" name="logo_bg" value="default" id="logo_bg_1" checked>
                     <label for="logo_bg_1"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_2" id="logo_bg_2">
                     <label for="logo_bg_2"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_3" id="logo_bg_3">
                     <label for="logo_bg_3"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_4" id="logo_bg_4">
                     <label for="logo_bg_4"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_5" id="logo_bg_5">
                     <label for="logo_bg_5"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_6" id="logo_bg_6">
                     <label for="logo_bg_6"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_7" id="logo_bg_7">
                     <label for="logo_bg_7"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="logo_bg" value="color_8" id="logo_bg_8">
                     <label for="logo_bg_8"></label>
                   </span>
-				</li>
-				<li class="drop-title"><p>头部</p></li>
-				<li class="drop-skin-li clearfix">
+                                </li>
+                                <li class="drop-title"><p>头部</p></li>
+                                <li class="drop-skin-li clearfix">
                   <span class="inverse">
                     <input type="radio" name="header_bg" value="default" id="header_bg_1" checked>
                     <label for="header_bg_1"></label>                      
-                  </span>                                                    
-                  <span>                                                     
+                  </span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_2" id="header_bg_2">
                     <label for="header_bg_2"></label>                      
-                  </span>                                                    
-                  <span>                                                     
+                  </span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_3" id="header_bg_3">
                     <label for="header_bg_3"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_4" id="header_bg_4">
                     <label for="header_bg_4"></label>                      
-                  </span>                                                    
-                  <span>                                                     
+                  </span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_5" id="header_bg_5">
                     <label for="header_bg_5"></label>                      
-                  </span>                                                    
-                  <span>                                                     
+                  </span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_6" id="header_bg_6">
                     <label for="header_bg_6"></label>                      
-                  </span>                                                    
-                  <span>                                                     
+                  </span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_7" id="header_bg_7">
                     <label for="header_bg_7"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="header_bg" value="color_8" id="header_bg_8">
                     <label for="header_bg_8"></label>
                   </span>
-				</li>
-				<li class="drop-title"><p>侧边栏</p></li>
-				<li class="drop-skin-li clearfix">
+                                </li>
+                                <li class="drop-title"><p>侧边栏</p></li>
+                                <li class="drop-skin-li clearfix">
                   <span class="inverse">
                     <input type="radio" name="sidebar_bg" value="default" id="sidebar_bg_1" checked>
                     <label for="sidebar_bg_1"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_2" id="sidebar_bg_2">
                     <label for="sidebar_bg_2"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_3" id="sidebar_bg_3">
                     <label for="sidebar_bg_3"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_4" id="sidebar_bg_4">
                     <label for="sidebar_bg_4"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_5" id="sidebar_bg_5">
                     <label for="sidebar_bg_5"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_6" id="sidebar_bg_6">
                     <label for="sidebar_bg_6"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_7" id="sidebar_bg_7">
                     <label for="sidebar_bg_7"></label>
                   </span>
-                  <span>
+                                    <span>
                     <input type="radio" name="sidebar_bg" value="color_8" id="sidebar_bg_8">
                     <label for="sidebar_bg_8"></label>
                   </span>
-				</li>
-			  </ul>
-			</li>
-            <!--切换主题配色-->
-          </ul>
-          
-        </div>
-      </nav>
-      
-    </header>
-    <!--End 头部信息-->
-    
-    <!--页面主要内容-->
-    <main class="layout-content">
-      
-      <div class="container-fluid">
-        
-        <div class="row">
-          <div >
-            <div class="card">
-              <div class="card-header"><h4>文档基本信息</h4></div>
-              <div class="card-body">
+                                </li>
+                            </ul>
+                        </li>
+                        <!--切换主题配色-->
+                    </ul>
 
-                <form class="form-horizontal"   id="uploadFiles">
-                  <div class="form-group">
-                    <div class="col-xs-12">
-                      <div class="form-control-static">用户名：david</div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-12" for="example-text-input">文档名</label>
-                    <div class="col-xs-12">
-                      <input class="form-control" type="text" id="example-text-input" name="documentName" placeholder="文档名称..">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-12" for="example-email-input">关键字</label>
-                    <div class="col-xs-12">
-                      <input class="form-control" type="text" id="example-email-input" name="keyWord" placeholder="关键字..">
-                    </div>
-                  </div>
+                </div>
+            </nav>
 
-                  <div class="form-group">
-                    <label class="col-xs-12" for="example-select">文档类型</label>
-                    <div class="col-xs-12">
-                      <select class="form-control" id="example-select" name="documentType" size="1">
-                        <option value="0">请选择</option>
-                        <option value="1">PDF</option>
-                        <option value="2">WORD</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-xs-12" for="example-file-input">上传文档</label>
-                    <div class="col-xs-12">
-                      <input type="file" id="example-file-input" name="documentUrl">
-                    </div>
-                  </div>
+        </header>
+        <!--End 头部信息-->
 
-                  <div class="form-group">
-                    <div class="col-xs-12">
-                      <button class="btn btn-primary" id="external_button">完成提交</button>
+        <!--页面主要内容-->
+        <main class="layout-content">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div>
+                        <div class="card">
+                            <div class="card-header"><h4>文档基本信息</h4></div>
+                            <div class="card-body">
+
+                                <form class="form-horizontal" id="uploadFiles">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <div class="form-control-static">用户名：david</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-12" for="example-text-input">文档名</label>
+                                        <div class="col-xs-12">
+                                            <input class="form-control" type="text" id="example-text-input"
+                                                   name="documentName" placeholder="文档名称..">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-12" for="example-email-input">关键字</label>
+                                        <div class="col-xs-12">
+                                            <input class="form-control" type="text" id="example-email-input"
+                                                   name="keyWord" placeholder="关键字..">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-12" for="example-select">文档类型</label>
+                                        <div class="col-xs-12">
+                                            <select class="form-control" id="example-select" name="documentType"
+                                                    size="1">
+                                                <option value="0">请选择</option>
+                                                <option value="1">PDF</option>
+                                                <option value="2">WORD</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-xs-12" for="example-file-input">上传文档</label>
+                                        <div class="col-xs-12">
+                                            <input type="file" id="example-file-input" name="documentUrl">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <button class="btn btn-primary" id="external_button">完成提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                </form>
-              </div>
+
+                </div>
             </div>
-          </div>
-        
-      </div>
-      </div>
-    </main>
-    <!--End 页面主要内容-->
-  </div>
+        </main>
+        <!--End 页面主要内容-->
+    </div>
 </div>
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -284,48 +287,45 @@
 
 
 <script type="text/javascript">
-  $('#external_button').click(function () {
-    doUpload();
-  });
+    $('#external_button').click(function () {
+        let formData = new FormData();
+        let userName = "xdw";
+        let keyWord = document.getElementById("example-email-input").value;
+        let documentName = document.getElementById("example-text-input").value;
+        let documentType = document.getElementById("example-select").value;
 
-  function doUpload(){
-    let formData = new FormData();
-    let userName="xdw";
-    let keyWord=document.getElementById("example-email-input").value;
-    let documentName=document.getElementById("example-text-input").value;
-    let documentType=document.getElementById("example-select").value;
+        formData.append("documentUrl", document.getElementById("example-file-input").files[0]);
+        formData.append("userName", userName);
+        formData.append("documentName", documentName);
+        formData.append("keyWord", keyWord);
+        formData.append("documentType", documentType);
 
-    formData.append("documentUrl", document.getElementById("example-file-input").files[0]);
-    formData.append("userName", userName);
-    formData.append("documentName", documentName);
-    formData.append("keyWord", keyWord);
-    formData.append("documentType", documentType);
-
-    if (userName == "") {
-      alert("用户名不得为空");
-    } else if (documentName == "") {
-      alert("文档名不得为空");
-    }else {
-
-      $.ajax({
-        type: "post",
-        url: " /file/upload/add",
-        data: formData,
-        contentType: false,
-        processData: false,
-        dataType: "json",
-        success: function (res) {
-          alert("上传成功！");
-          //页面跳转
-          $(window).attr("location", "file_list.html")
-        },
-        error: function (res) {
-          let json = JSON.parse(res.responseText);
-          alert(json.message);
+        if (userName == "") {
+            alert("用户名不得为空");
+        } else if (documentName == "") {
+            alert("文档名不得为空");
+        } else {
+$(window).attr("location", "file_list.html");
+            $.ajax({
+                type: "post",
+                url: " /file/upload/add",
+                data: formData,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                success: function (res) {
+                    console.log(11);
+                    alert("上传成功！");
+                    //页面跳转
+                     //$(window).attr("location", "file_list.html");
+                },
+                error: function (res) {
+                    let json = JSON.parse(res.responseText);
+                    alert(json.message);
+                }
+            });
         }
-      });
-    }
-  }
+    });
 
 
 </script>

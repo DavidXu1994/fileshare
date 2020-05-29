@@ -58,7 +58,7 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         }
         String path="";
         try {
-             path=  fileUpload( file);
+            path=   fileUpload( file);
         }catch (Exception e){
             throw new RuntimeException("文件上传失败，请重试！");
         }
@@ -100,6 +100,59 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         try {
             downloadFile(dto.getDocumentUrl(),response,dto.getDocumentName());
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void queryFileOnline(HttpServletResponse response) {
+        //File file = Office2PDF.openOfficeToPDF("/Users/JJC/Downloads/20170302汽修服务测试反馈.docx");
+        File file =new File("/Users/davidxu/Desktop/testfile/准考证31933.pdf");
+        BufferedInputStream br = null;
+        try {
+            br = new BufferedInputStream(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        byte[] buf = new byte[1024];
+        int len = 0;
+        response.reset(); // 非常重要
+        response.setContentType("application/pdf");
+        try {
+            response.setHeader("Content-Disposition",
+                    "inline; filename=" + java.net.URLEncoder.encode(file.getName(), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        OutputStream out = null;
+        try {
+            out = response.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while (true) {
+            try {
+                if (!((len = br.read(buf)) != -1)) {
+                    break;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                out.write(buf, 0, len);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            out.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -56,7 +56,6 @@ public class DocumentInfoController {
     ) {
          documentInfoService.addFileUpload(file,userName,documentName,keyWord,documentType);
         return ResponseResult.success();
-        //@RequestBody  DocumentInfoVo documentInfoVo
     }
 
     @PostMapping("/file/upload/edit")
@@ -95,4 +94,12 @@ public class DocumentInfoController {
         //return new ModelAndView("index");
         return ResponseResult.success();
     }
+
+    @GetMapping("/file/online/query")
+    @ApiOperation("在线预览")
+    public void queryFileOnline(HttpServletResponse response) {
+        documentInfoService.queryFileOnline(response);
+        // return ResponseResult.success();
+    }
+
 }

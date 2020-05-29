@@ -39,6 +39,6 @@ public interface DocumentInfoService {
 
     void deleteFileById(Long id);
     void downloadFileById(HttpServletResponse response, Long id);
-
+    void queryFileOnline(HttpServletResponse response);
 
 }

@@ -13,7 +13,6 @@ public class ResponseResult<T> implements Serializable {
     public static final Integer APP_RESULT_CODE_BIS = -4;
     public static final Integer APP_RESULT_CODE_FAILED = -99;
 
-    //以下3个字段为兼容B端原有APP数据获取展示模式
     private Integer code;
     private String desc;
     private Integer time;
