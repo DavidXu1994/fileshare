@@ -154,7 +154,7 @@ a.forgot-w3layouts {
     cursor: pointer;
     padding: 13px 38px;
     font-size: 14px;
-    width: 100%;
+    width: 85%;
     margin-top: 1em;
     font-weight: bold;
     text-transform: uppercase;
@@ -164,6 +164,7 @@ a.forgot-w3layouts {
     -moz-transition: 0.3s all;
     -o-transition: 0.3s all;
     -ms-transition: 0.3s all;
+	text-align: center;
 }
 .submit-w3l input[type="submitButton"]:hover{
     background: #df5799;
