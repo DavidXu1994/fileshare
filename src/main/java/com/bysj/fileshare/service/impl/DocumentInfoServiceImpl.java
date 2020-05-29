@@ -210,8 +210,9 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
      */
     public   String fileUpload (MultipartFile file) {
         // 先设定一个放置上传文件的文件夹(该文件夹可以不存在，下面会判断创建)
-        String deposeFilesDir=File.separator+"Users"+File.separator+"davidxu"+File.separator+"Desktop"+File.separator+"testfile"+File.separator;
-//        String deposeFilesDir=File.separator+"upload"+File.separator+"files"+File.separator;
+        //String deposeFilesDir=File.separator+"Users"+File.separator+"davidxu"+File.separator+"Desktop"+File.separator+"testfile"+File.separator;
+       //String deposeFilesDir="C:\\Users\\DavidXu\\Desktop\\新建文件夹 (2)";
+        String deposeFilesDir="/upload/files/";
         // 判断文件是否有内容
         if (file.isEmpty()) {
             System.out.println("该文件无任何内容!!!");

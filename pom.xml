@@ -86,11 +86,11 @@
 
 
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
-		<dependency>
+		<!--<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.5.0-b01</version>
-		</dependency>
+		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/javax.activation/activation -->
 		<dependency>
 			<groupId>javax.activation</groupId>
