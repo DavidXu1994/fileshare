@@ -48,6 +48,7 @@ public class DocumentInfoController {
 
     @PostMapping("/file/upload/add")
     @ApiOperation("上传新增文档")
+    @ResponseBody
     public ResponseResult addFileUpload(@RequestParam(value = "documentUrl")   MultipartFile file,
                                         @RequestParam(value = "userName")   String userName,
                                         @RequestParam(value = "documentName")   String documentName,
@@ -87,13 +88,6 @@ public class DocumentInfoController {
        // return ResponseResult.success();
     }
 
-
-    @GetMapping("/index/query")
-    @ApiOperation("首页")
-    public ResponseResult index() {
-        //return new ModelAndView("index");
-        return ResponseResult.success();
-    }
 
     @GetMapping("/file/online/query")
     @ApiOperation("在线预览")

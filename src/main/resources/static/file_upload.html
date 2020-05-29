@@ -223,7 +223,7 @@
                             <div class="card-header"><h4>文档基本信息</h4></div>
                             <div class="card-body">
 
-                                <form class="form-horizontal" id="uploadFiles">
+                                <form class="form-horizontal" id="uploadFiles" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <div class="col-xs-12">
                                             <div class="form-control-static">用户名：david</div>
@@ -285,14 +285,13 @@
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/jquery.serializejson.js"></script>
 
-
 <script type="text/javascript">
-    $('#external_button').click(function () {
-        let formData = new FormData();
-        let userName = "xdw";
-        let keyWord = document.getElementById("example-email-input").value;
-        let documentName = document.getElementById("example-text-input").value;
-        let documentType = document.getElementById("example-select").value;
+    /*$('#external_button').click(function () {
+        var formData = new FormData();
+        var userName = "xdw";
+        var keyWord = document.getElementById("example-email-input").value;
+        var documentName = document.getElementById("example-text-input").value;
+        var documentType = document.getElementById("example-select").value;
 
         formData.append("documentUrl", document.getElementById("example-file-input").files[0]);
         formData.append("userName", userName);
@@ -302,30 +301,69 @@
 
         if (userName == "") {
             alert("用户名不得为空");
-        } else if (documentName == "") {
+        }
+        if (documentName == "") {
             alert("文档名不得为空");
-        } else {
-$(window).attr("location", "file_list.html");
+        }
+
             $.ajax({
-                type: "post",
+                type: 'POST',
+                cache:false,
                 url: " /file/upload/add",
                 data: formData,
                 contentType: false,
                 processData: false,
-                dataType: "json",
+                dataType: 'json',
                 success: function (res) {
                     console.log(11);
                     alert("上传成功！");
                     //页面跳转
-                     //$(window).attr("location", "file_list.html");
+                     $(window).attr("location", "file_list.html");
                 },
                 error: function (res) {
                     let json = JSON.parse(res.responseText);
                     alert(json.message);
                 }
             });
-        }
-    });
+    });*/
+
+        $(function () {
+            $("#external_button").click(function () {
+                var userName = "xdw";
+                var keyWord = document.getElementById("example-email-input").value;
+                var documentName = document.getElementById("example-text-input").value;
+                var documentType = document.getElementById("example-select").value;
+                var form = new FormData();
+                form.append("documentUrl", document.getElementById("example-file-input").files[0]);
+                form.append("userName", userName);
+                 form.append("documentName", documentName);
+                 form.append("keyWord", keyWord);
+                form.append("documentType", documentType);
+                $(window).attr("location", "file_list.html");
+                $.ajax({
+                    url: "/file/upload/add",        //后台url
+                    data: form,
+                    cache: false,
+                    async: false,
+                    type: "POST",                   //类型，POST或者GET
+                    dataType: 'json',              //数据返回类型，可以是xml、json等
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {      //成功，回调函数
+                            alert("上传成功！");
+                       // $(window).attr("location", "index.html");
+                    },
+                    error: function (er) {          //失败，回调函数
+                        alert(er);
+                    }
+                });
+
+
+            })
+
+        })
+
+
 
 
 </script>

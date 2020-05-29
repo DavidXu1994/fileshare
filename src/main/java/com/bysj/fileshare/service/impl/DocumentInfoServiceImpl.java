@@ -157,9 +157,20 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         }
     }
 
-
+    /**
+     * 文件下载
+     * @param filePath
+     * @param response
+     * @param fileName
+     * @throws Exception
+     */
     public void downloadFile(String filePath, HttpServletResponse response,String fileName ) throws Exception {
         File file = new File(filePath);
+        //此处fileName没有后缀，需要拼接
+        if (filePath.indexOf(".") >= 0) {
+            String[] fileNameSplitArray = filePath.split("\\.");
+            fileName = fileName  + "." + fileNameSplitArray[1];
+        }
         if (file.exists()) {
             response.setContentType("application/force-download");// 设置强制下载不打开
             response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
@@ -210,9 +221,9 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
      */
     public   String fileUpload (MultipartFile file) {
         // 先设定一个放置上传文件的文件夹(该文件夹可以不存在，下面会判断创建)
-        //String deposeFilesDir=File.separator+"Users"+File.separator+"davidxu"+File.separator+"Desktop"+File.separator+"testfile"+File.separator;
+        String deposeFilesDir=File.separator+"Users"+File.separator+"davidxu"+File.separator+"Desktop"+File.separator+"testfile"+File.separator;
        //String deposeFilesDir="C:\\Users\\DavidXu\\Desktop\\新建文件夹 (2)";
-        String deposeFilesDir="/upload/files/";
+       // String deposeFilesDir="/upload/files/";
         // 判断文件是否有内容
         if (file.isEmpty()) {
             System.out.println("该文件无任何内容!!!");
@@ -225,11 +236,11 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         if (index > 0) {
             fileName = fileName.substring(index + 1);
         }
-        // 判断单个文件大于1M
+        // 判断单个文件大于10M
         long fileSize = file.getSize();
-        if (fileSize > 1024 * 1024) {
+        if (fileSize > 1024 * 1024*10) {
             System.out.println("文件大小为(单位字节):" + fileSize);
-            System.out.println("该文件大于1M");
+            System.out.println("该文件大于10M");
         }
         // 当文件有后缀名时
         if (fileName.indexOf(".") >= 0) {
