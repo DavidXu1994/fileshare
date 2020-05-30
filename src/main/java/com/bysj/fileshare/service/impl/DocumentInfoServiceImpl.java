@@ -336,7 +336,7 @@ public class DocumentInfoServiceImpl implements DocumentInfoService {
         }
         // 判断单个文件大于10M
         long fileSize = file.getSize();
-        if (fileSize > 1024 * 1024 ) {
+        if (fileSize > 1024 * 1024*10 ) {
             System.out.println("文件大小为(单位字节):" + fileSize);
             throw new RuntimeException("该文件大于10M！:"+fileSize);
 
