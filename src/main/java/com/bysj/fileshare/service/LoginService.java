@@ -19,7 +19,17 @@ import javax.servlet.http.HttpSession;
  */
 public interface LoginService {
 
+    /**
+     * 用户注册
+     * @param userInfoVo
+     */
     void registerUser(UserInfoVo userInfoVo);
+
+    /**
+     * 用户登录
+     * @param session
+     * @param userInfoVo
+     */
     void userLogin(HttpSession session,UserInfoVo userInfoVo);
 
 }

@@ -5,10 +5,9 @@ import com.bysj.fileshare.mybatis.mapper.LoginMapper;
 import com.bysj.fileshare.service.LoginService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
 
 import javax.servlet.http.HttpSession;
 
@@ -31,6 +30,11 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginMapper loginMapper;
 
+    /**
+     * 用户注册
+     *
+     * @param userInfoVo
+     */
     @Override
     public void registerUser(UserInfoVo userInfoVo) {
         if (StringUtils.isEmpty(userInfoVo.getUserName()) || StringUtils.isEmpty(userInfoVo.getPassword())
@@ -42,16 +46,14 @@ public class LoginServiceImpl implements LoginService {
         if (!StringUtils.isEmpty(userName)) {
             throw new RuntimeException("此用户名已存在！");
         }
-
         //判断密码是否相同
         if (userInfoVo.getPassword().equals(userInfoVo.getPasswordAgain())) {
-
             //转码
             String pwd = encodePassword(userInfoVo.getPassword());
             userInfoVo.setPassword(pwd);
             userInfoVo.setPasswordAgain(pwd);
             /**
-             * 注册进来的用户都是0-0
+             * 注册进来的用户都是state =【0 -正常，1-冻结】 type=[0-普通用户，1-管理员]
              */
             userInfoVo.setState(0);
             userInfoVo.setType(0);
@@ -63,8 +65,14 @@ public class LoginServiceImpl implements LoginService {
         loginMapper.registerUser(userInfoVo);
     }
 
+    /**
+     * 用户登录
+     *
+     * @param session
+     * @param userInfoVo
+     */
     @Override
-    public void userLogin(HttpSession session,UserInfoVo userInfoVo) {
+    public void userLogin(HttpSession session, UserInfoVo userInfoVo) {
         if (StringUtils.isEmpty(userInfoVo.getUserName()) || StringUtils.isEmpty(userInfoVo.getPassword())) {
             throw new RuntimeException("用户名密码不得为空！");
         }
@@ -74,8 +82,7 @@ public class LoginServiceImpl implements LoginService {
             throw new RuntimeException("用户名密码不匹配，请检查！");
         }
         //如果用户登录成功，设置session
-
-        session.setAttribute("userName",userInfoVo.getUserName());
+        session.setAttribute("userName", userInfoVo.getUserName());
     }
 
     /**
@@ -87,8 +94,5 @@ public class LoginServiceImpl implements LoginService {
     private String encodePassword(String password) {
         return new BCryptPasswordEncoder().encode(password);
     }
-
-
-
 
 }

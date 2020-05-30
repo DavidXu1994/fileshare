@@ -46,7 +46,7 @@
    <!-- <delete id="deleteFileById" parameterType="java.lang.Long">
         DELETE from bysj_document_info WHERE id=#{id}
 </delete>-->
-    <update id="deleteFileById" >
+    <update id="deleteFileById" parameterType="java.util.Map">
         UPDATE  bysj_document_info set is_deleted=1,update_time=#{updateTime} WHERE id=#{id}
 </update>
 </mapper>

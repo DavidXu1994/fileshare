@@ -33,12 +33,36 @@ public interface DocumentInfoService {
      */
      void addFileUpload(MultipartFile file,String userName,String documentName,String keyWord, Integer documentType);
 
+    /**
+     * 编辑文档
+     * @param documentInfoVo
+     */
     void editFileUpload(DocumentInfoVo documentInfoVo);
 
+    /**
+     * 通过id查询文档
+     * @param id
+     * @return
+     */
     DocumentInfoVo queryFileById(Long id);
 
+    /**
+     * 通过id删除文档
+     * @param id
+     */
     void deleteFileById(Long id);
+
+    /**
+     * 文档下载
+     * @param response
+     * @param id
+     */
     void downloadFileById(HttpServletResponse response, Long id);
-    void queryFileOnline(HttpServletResponse response);
+
+    /**
+     * 文档下载
+     * @param response
+     */
+    void queryFileOnline(HttpServletResponse response,Long id);
 
 }

@@ -47,7 +47,7 @@ public class DocumentInfoController {
 
 
     @PostMapping("/file/upload/add")
-    @ApiOperation("上传新增文档")
+    @ApiOperation("上传文档")
     @ResponseBody
     public ResponseResult addFileUpload(@RequestParam(value = "documentUrl")   MultipartFile file,
                                         @RequestParam(value = "userName")   String userName,
@@ -66,14 +66,12 @@ public class DocumentInfoController {
         return ResponseResult.success();
     }
 
-
     @GetMapping("/file/upload/byid/query")
     @ApiOperation("查询单个文档")
     public ResponseResult queryFileById(@RequestParam(value = "id") Long id) {
        DocumentInfoVo ls=  documentInfoService.queryFileById(id);
         return ResponseResult.success(ls);
     }
-
 
     @GetMapping("/file/upload/delete")
     @ApiOperation("删除单个文档")
@@ -85,15 +83,11 @@ public class DocumentInfoController {
     @ApiOperation("下载文档")
     public void downloadFileById(HttpServletResponse response, @RequestParam(value = "id") Long id) {
         documentInfoService.downloadFileById(response,id);
-       // return ResponseResult.success();
     }
-
 
     @GetMapping("/file/online/query")
     @ApiOperation("在线预览")
-    public void queryFileOnline(HttpServletResponse response) {
-        documentInfoService.queryFileOnline(response);
-        // return ResponseResult.success();
+    public void queryFileOnline(HttpServletResponse response,@RequestParam(value = "id") Long id) {
+        documentInfoService.queryFileOnline(response,id);
     }
-
 }

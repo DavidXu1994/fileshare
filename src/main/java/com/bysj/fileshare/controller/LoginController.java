@@ -1,7 +1,6 @@
 package com.bysj.fileshare.controller;
 
 import com.bysj.fileshare.config.ResponseResult;
-import com.bysj.fileshare.entity.po.UserInfo;
 import com.bysj.fileshare.entity.vo.UserInfoVo;
 import com.bysj.fileshare.service.LoginService;
 import io.swagger.annotations.Api;
@@ -9,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -30,12 +28,12 @@ import javax.servlet.http.HttpSession;
 @Api(tags = "【用户登录注册】")
 @RestController
 public class LoginController {
-@Autowired
+    @Autowired
     LoginService loginService;
 
     @ApiOperation("用户注册")
     @PostMapping(value = "/user/register")
-    public ResponseResult registerUser( @RequestBody UserInfoVo userInfoVo) {
+    public ResponseResult registerUser(@RequestBody UserInfoVo userInfoVo) {
         loginService.registerUser(userInfoVo);
         return ResponseResult.success();
     }
@@ -43,7 +41,7 @@ public class LoginController {
     @ApiOperation("用户登录")
     @PostMapping(value = "/user/login")
     public ResponseResult userLogin(HttpSession session, @RequestBody UserInfoVo userInfoVo) {
-        loginService.userLogin(session,userInfoVo);
+        loginService.userLogin(session, userInfoVo);
         return ResponseResult.success();
     }
 }

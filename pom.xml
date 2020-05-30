@@ -117,7 +117,52 @@
             <artifactId>jquery</artifactId>
             <version>3.1.1</version>
         </dependency>
+
+		<dependency>
+			<groupId>org.jodconverter</groupId>
+			<artifactId>jodconverter-core</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jodconverter</groupId>
+			<artifactId>jodconverter-spring-boot-starter</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+
+
+		<!--jodconverter 本地支持包 -->
+		<!-- https://mvnrepository.com/artifact/org.jodconverter/jodconverter-local -->
+		<dependency>
+			<groupId>org.jodconverter</groupId>
+			<artifactId>jodconverter-local</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+		<!--时间转换工具包 -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
 	</dependencies>
+
+	<!-- 项目构建各环境的文件列表 -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profileActive>dev</profileActive>
+			</properties>
+			<activation>
+				<!-- 设置当前为默认值 -->
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profileActive>prod</profileActive>
+			</properties>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ProjectName: fileshare
@@ -36,6 +37,6 @@ public interface DocumentInfoMapper {
 
     DocumentInfoVo queryFileById(Long id);
 
-    void deleteFileById(Long updateTime ,Long id);
+    void deleteFileById(Map<String,Object> param);
 
 }

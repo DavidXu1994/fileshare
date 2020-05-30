@@ -300,15 +300,15 @@
                             <label for="message-name" class="control-label">关键字：</label>
                             <input type="text" class="form-control" id="message-name">
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <label for="message-type" class="control-label">文档类型：</label>
                             <input type="text" class="form-control" id="message-type">
-                        </div>
+                        </div>-->
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">确定</button>
+                    <button type="button" class="btn btn-primary" onclick="editDocumentSubmit()">确定</button>
                 </div>
             </div>
         </div>
@@ -356,9 +356,11 @@
                         " <button type='button' class='btn' onclick='previewFile(" + data[i].id + ")' id='previewOne'>预览</button>" +
                         " <button type='button' class='btn' onclick='downloadFile(" + data[i].id + ")' id='downloadOne'>下载</button>";
                     if (data[i].isOneSelf) {
+                        //自己可以删自己
                         str += " <button type='button' class='btn' data-toggle='modal' value=" + data[i].id + " data-target='#exampleModal' id='editOne' >编辑</button>" +
                             " <button type='button' class='btn' onclick='deleteFile(" + data[i].id + ")' id='deleteOne'>删除</button>";
                     } else {
+                        //不可以删别人
                         str += " <button type='button'  disabled='disabled' class='btn' data-toggle='modal' value=" + data[i].id + " data-target='#exampleModal' id='editOne' >编辑</button>" +
                             " <button type='button' disabled='disabled' class='btn' onclick='deleteFile(" + data[i].id + ")' id='deleteOne'>删除</button>";
 
@@ -376,6 +378,32 @@
 
 
     <!--编辑文档 -->
+    //编辑提交
+    function editDocumentSubmit() {
+        var data = {
+            id: $("#blogEditModal input[name='id']").val(),
+            documentName: $("#blogEditModal input[name='documentName']").val(),
+            documentType: $("#blogEditModal input[name='documentType']").val(),
+            keyWord: $("#blogEditModal textarea[name='keyWord']").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "/file/upload/edit?id=" + data.id,
+            //dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data), //需要将对象转换为字符串提交
+            success: function () {
+                //新增后重新加载
+                viewBlogs();
+                //关闭弹窗
+                $('#blogEditModal').modal('hide');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
     <!--下载文档 -->
     function downloadFile(id) {
             let formData = new FormData();
@@ -410,8 +438,10 @@
 
     }
 
-    function test(){
-        window.location.href="/file/online/query";
+    function previewFile(id){
+        let formData = new FormData();
+        formData.append("id", id);
+        window.location.href="/file/online/query?id="+id;
     }
 
 
