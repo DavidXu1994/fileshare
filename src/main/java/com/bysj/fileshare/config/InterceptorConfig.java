@@ -1,6 +1,7 @@
 package com.bysj.fileshare.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
@@ -19,17 +20,22 @@ import org.springframework.web.servlet.config.annotation.*;
  * @Version: 1.0
  * @Copyright: 上海昱泓教育科技有限公司
  */
-//@Configuration
+@Configuration
+@Component
     public class InterceptorConfig  implements WebMvcConfigurer {
 
+    //将拦截器作为bean写入配置中
+    @Bean
+    public AdminInterceptor authTokenInterceptor() {
+        return new AdminInterceptor();
+    }
     // 注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加拦截的请求，并排除几个不拦截的请求
-        /*registry.addInterceptor(new AdminInterceptor()).addPathPatterns("/**")
-                .excludePathPatterns("/favicon.ico", "/swagger**")
-                .excludePathPatterns("/css/**")
-                .excludePathPatterns("/index.html","/signup.html", "/user/register", "/user/login");*/
+        registry.addInterceptor(authTokenInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/favicon.ico","/css/**","/fonts/**","/images/**","/js/**")
+                .excludePathPatterns("/index.html","/signup.html", "/user/register", "/user/login");
     }
 
 

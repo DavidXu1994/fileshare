@@ -23,7 +23,7 @@ import java.io.IOException;
  * @Version: 1.0
  * @Copyright: 上海昱泓教育科技有限公司
  */
-//@Component
+@Component
 public class AdminInterceptor implements HandlerInterceptor {
     /**
      * 在请求处理之前进行调用（Controller方法调用之前）
@@ -32,15 +32,14 @@ public class AdminInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 //        System.out.println("执行了TestInterceptor的preHandle方法");
             //统一拦截（查询当前session是否存在user）(这里user会在每次登陆成功后，写入session)
-            Object user=request.getSession().getAttribute("useName");
+            Object user=request.getSession().getAttribute("userName");
             if (user == null) {
                 // 未登录，给出错误信息，
                 request.setAttribute("msg","无权限请先登录");
                 // 获取request返回页面到登录页
                 try {
-                    request.getRequestDispatcher("/index.html").forward(request, response);
-                } catch (ServletException e) {
-                    e.printStackTrace();
+                  //  request.getRequestDispatcher("/index.html").forward(request, response);
+                    response.sendRedirect("/index.html");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -67,14 +67,14 @@
                         <li class="dropdown dropdown-profile">
                             <a href="javascript:void(0)" data-toggle="dropdown">
                                 <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员"/>
-                                <span>管理员 <span class="caret"></span></span>
+                                <span id="onlyUserName"> <span class="caret"></span></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li><a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a></li>
                                 <li><a href="pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a></li>
                                 <li><a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
                                 <li class="divider"></li>
-                                <li><a href="pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a></li>
+                                <li onclick="loginOut()"><a href="index.html"><i class="mdi mdi-logout-variant" ></i> 退出登录</a></li>
                             </ul>
                         </li>
                         <!--切换主题配色-->
@@ -226,7 +226,7 @@
                                 <form class="form-horizontal" id="uploadFiles" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <div class="col-xs-12">
-                                            <div class="form-control-static">用户名：david</div>
+                                            <div class="form-control-static" id="onlyUserName1" value="">用户名：</div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -290,9 +290,28 @@
 <script type="text/javascript" src="js/jquery.serializejson.js"></script>
 
 <script type="text/javascript">
+    //获取服务器session
+    var userName="admin";
+    $.ajax({
+        type: "post",
+        url: "/user/session/query",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (res) {
+            userName = res.data;
+            $("#onlyUserName").html(userName);
+            $("#onlyUserName1").html("用户名:"+userName);
+            $("#onlyUserName1").val(userName);
+        },
+        error: function (res) {
+            alert("登录失败，请重新登录！");
+            $(window).attr("location","index.html")
+        }
+    });
+
         $(function () {
             $("#external_button").click(function () {
-                var userName = "xdw";
+                var userName = $("#onlyUserName1").val();
                 var keyWord = document.getElementById("example-email-input").value;
                 var documentName = document.getElementById("example-text-input").value;
                 var documentType = document.getElementById("example-select").value;
@@ -336,7 +355,20 @@
 
         })
 
-
+    function loginOut(){
+        $.ajax({
+            type: "post",
+            url: "/user/session/remove",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+            },
+            error: function (res) {
+                alert("登录失败，请重新登录！");
+                $(window).attr("location","index.html")
+            }
+        });
+    }
 
 
 </script>

@@ -66,14 +66,14 @@
                     <li class="dropdown dropdown-profile">
                         <a href="javascript:void(0)" data-toggle="dropdown">
                             <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员"/>
-                            <span>管理员 <span class="caret"></span></span>
+                            <span id="onlyUserName" value=""> <span class="caret"></span></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li><a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a></li>
                             <li><a href="pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a></li>
                             <li><a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
                             <li class="divider"></li>
-                            <li><a href="pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a></li>
+                            <li onclick="loginOut()"><a href="index.html"><i class="mdi mdi-logout-variant" ></i> 退出登录</a></li>
                         </ul>
                     </li>
                     <!--切换主题配色-->
@@ -322,6 +322,27 @@
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/jquery.serializejson.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(e) {
+        //获取服务器session
+        var userName="admin";
+        $.ajax({
+            type: "post",
+            url: "/user/session/query",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+                userName = res.data;
+                $("#onlyUserName").html(userName);
+                $("#onlyUserName").val(userName);
+            },
+            error: function (res) {
+                alert("登录失败，请重新登录！");
+                $(window).attr("location","index.html")
+            }
+        });
+
+    });
+
     $('#exampleModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget)
         var recipient = button.data('whatever')
@@ -333,7 +354,7 @@
     <!--搜索文档 -->
     function queryFileList() {
         var data = $("#searchFile input[name='searchWord']").val();
-        var userName = "xdw";
+        var userName = $("#onlyUserName").val();
         $.ajax({
             type: "GET",
             url: "/file/list/query?searchWord=" + data + "&userName=" + userName,
@@ -472,7 +493,20 @@
         formData.append("id", id);
         window.location.href="/file/online/query?id="+id;
     }
-
+    function loginOut(){
+        $.ajax({
+            type: "post",
+            url: "/user/session/remove",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (res) {
+            },
+            error: function (res) {
+                alert("登录失败，请重新登录！");
+                $(window).attr("location","index.html")
+            }
+        });
+    }
 
 </script>
 </body>

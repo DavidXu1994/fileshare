@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -42,6 +43,21 @@ public class LoginController {
     @PostMapping(value = "/user/login")
     public ResponseResult userLogin(HttpSession session, @RequestBody UserInfoVo userInfoVo) {
         loginService.userLogin(session, userInfoVo);
+        return ResponseResult.success();
+    }
+
+    @ApiOperation("获取用户session")
+    @PostMapping(value = "/user/session/query")
+    public ResponseResult queryUserLogin(HttpSession session) {
+        Object user=session.getAttribute("userName");
+        return ResponseResult.success(user);
+    }
+
+    @ApiOperation("用户退出登录")
+    @PostMapping(value = "/user/session/remove")
+    public ResponseResult removeUserLogin(HttpSession session) {
+        session.removeAttribute("userName");
+        session.invalidate();
         return ResponseResult.success();
     }
 }

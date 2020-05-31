@@ -88,14 +88,14 @@
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
                 <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员"/>
-                <span>管理员 <span class="caret"></span></span>
+                <span id="onlyUserName"> <span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li> <a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>
                 <li> <a href="pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
                 <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
                 <li class="divider"></li>
-                <li> <a href="pages_login.html"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
+                <li onclick="loginOut()"> <a href="index.html"><i class="mdi mdi-logout-variant" ></i> 退出登录</a> </li>
               </ul>
             </li>
             <!--切换主题配色-->
@@ -257,14 +257,46 @@
 <script type="text/javascript" src="js/Chart.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e) {
-    var myDate = new Date();
-    var year=myDate.getFullYear();        //获取当前年
-    var month=myDate.getMonth()+1;   //获取当前月
-    var date=myDate.getDate();            //获取当前日
-    var now=year+'年'+month+"月"+date+"日";
-    $("#mazey").html("欢迎您,孙燕");
-    $("#todayDate").html("今天是,"+now);
+    //获取服务器session
+    var userName="admin";
+    $.ajax({
+        type: "post",
+        url: "/user/session/query",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (res) {
+            userName = res.data;
+            var myDate = new Date();
+            var year=myDate.getFullYear();        //获取当前年
+            var month=myDate.getMonth()+1;   //获取当前月
+            var date=myDate.getDate();            //获取当前日
+            var now=year+'年'+month+"月"+date+"日";
+            $("#mazey").html("欢迎您,"+userName);
+            $("#todayDate").html("今天是,"+now);
+            $("#onlyUserName").html(userName);
+        },
+        error: function (res) {
+            alert("登录失败，请重新登录！");
+            $(window).attr("location","index.html")
+        }
+    });
+
 });
+
+ function loginOut(){
+     $.ajax({
+         type: "post",
+         url: "/user/session/remove",
+         contentType: "application/json; charset=utf-8",
+         dataType: "json",
+         success: function (res) {
+         },
+         error: function (res) {
+             alert("登录失败，请重新登录！");
+             $(window).attr("location","index.html")
+         }
+     });
+}
 </script>
 </body>
 </html>
