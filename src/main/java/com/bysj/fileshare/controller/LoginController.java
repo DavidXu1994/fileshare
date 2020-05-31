@@ -56,7 +56,7 @@ public class LoginController {
     @ApiOperation("用户退出登录")
     @PostMapping(value = "/user/session/remove")
     public ResponseResult removeUserLogin(HttpSession session) {
-        session.removeAttribute("userName");
+       // session.removeAttribute("userName");
         session.invalidate();
         return ResponseResult.success();
     }

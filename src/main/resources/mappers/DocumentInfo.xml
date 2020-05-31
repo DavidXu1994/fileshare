@@ -18,7 +18,7 @@
     </resultMap>
 
     <select id="queryFileList" parameterType="java.lang.String" resultMap="queryFileListResult">
-        select * from bysj_document_info where is_deleted=0 and  (document_name like concat('%',#{searchWord},'%') or key_word like concat('%',#{searchWord},'%'))
+        select * from bysj_document_info where is_deleted=0 and  (document_name like concat('%',#{searchWord},'%') or key_word like concat('%',#{searchWord},'%')) order by create_time desc
     </select>
 
 

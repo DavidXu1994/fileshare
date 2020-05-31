@@ -253,6 +253,7 @@
                                         <th>关键字</th>
                                         <th>文档类型</th>
                                         <th>上传人</th>
+                                        <th>上传时间</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -363,9 +364,11 @@
             success: function (res) {
                 var data = res.data;
                 var str = "";
+
                 //先清空表格
                 $('#tableFileList').find("tr").remove();
                 for (var i = 0; i < data.length; i++) {
+                    var date=formatData(new Date(data[i].createTime));
                         if(data[i].documentType==1){
                             data[i].documentType="pdf";
                         }else if(data[i].documentType==2){
@@ -385,6 +388,7 @@
                         "<td>" + data[i].keyWord + "</td>" +
                         "<td>" + data[i].documentType + "</td>" +
                         "<td>" + data[i].userName + "</td>" +
+                        "<td>" + date + "</td>" +
                         "<td><div class='btn-group'>" +
                         " <button type='button' class='btn' onclick='previewFile(" + data[i].id + ")' id='previewOne'>预览</button>" +
                         " <button type='button' class='btn' onclick='downloadFile(" + data[i].id + ")' id='downloadOne'>下载</button>";
@@ -407,6 +411,16 @@
 
             }
         });
+    }
+
+    function formatData(date){
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = date.getDate() + ' ';
+        h = date.getHours() + ':';
+        m = date.getMinutes() + ':';
+        s = date.getSeconds();
+       return Y+M+D+h+m+s;
     }
 
 
