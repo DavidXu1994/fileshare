@@ -12,13 +12,13 @@ import java.util.Map;
  * @Package: com.bysj.fileshare.mybatis.mapper
  * @ClassName: DocumentInfo
  * @Description: java类作用描述
- * @Author: 徐大伟
+ * @Author: 孙燕
  * @CreateDate: 2020/5/21 11:07 下午
  * @UpdateUser:
  * @UpdateDate: 2020/5/21 11:07 下午
  * @UpdateRemark:
  * @Version: 1.0
- * @Copyright: 上海昱泓教育科技有限公司
+ * @Copyright: SunYan
  */
 @Mapper //指定操作数据库mapper
 public interface DocumentInfoMapper {

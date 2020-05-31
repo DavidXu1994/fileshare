@@ -15,13 +15,13 @@ import java.io.IOException;
  * @Package: com.bysj.fileshare.config
  * @ClassName: AdminInterceptor
  * @Description: java类作用描述
- * @Author: 徐大伟
+ * @Author: 孙燕
  * @CreateDate: 2020/5/26 1:29 上午
  * @UpdateUser:
  * @UpdateDate: 2020/5/26 1:29 上午
  * @UpdateRemark:
  * @Version: 1.0
- * @Copyright: 上海昱泓教育科技有限公司
+ * @Copyright: SunYan
  */
 @Component
 public class AdminInterceptor implements HandlerInterceptor {

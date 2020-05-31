@@ -16,13 +16,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Package: com.bysj.fileshare.config
  * @ClassName: SwaggerConfig
  * @Description: java类作用描述
- * @Author: 徐大伟
+ * @Author: 孙燕
  * @CreateDate: 2020/5/22 11:43 下午
  * @UpdateUser:
  * @UpdateDate: 2020/5/22 11:43 下午
  * @UpdateRemark:
  * @Version: 1.0
- * @Copyright: 上海昱泓教育科技有限公司
+ * @Copyright: SunYan
  */
 @Configuration
 @EnableSwagger2
