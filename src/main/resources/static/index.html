@@ -34,7 +34,7 @@
 			<form id="userLogin" method="post">
 					<input type="text" name="userName" placeholder="userName" required="" />
 					<input type="password" name="password" placeholder="password" required="" autocomplete="off"/>
-					<a href="#" class="forgot-w3layouts">忘记密码 ?</a>
+					<a href="#" class="forgot-w3layouts" onclick="forgetPassword()">忘记密码 ?</a>
 				<div class="submit-w3l">
                     <input type="submitButton" onclick="loginIn()" value="登录" text-align="center">
 				</div>
@@ -45,7 +45,7 @@
 <!--//form-ends-here-->
 <!-- copyright -->
     <div class="copyright w3-agile">
-		<p> © 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com</p>
+		<p> © 2020 文档共享系统 . All rights reserved | Design by 2229295121@qq.com</p>
         </div>
 	<!-- //copyright --> 
 	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
@@ -73,5 +73,9 @@
 			}
 		});
 	}
+
+	function forgetPassword() {
+	alert("请联系管理员：2229295121@qq.com");
+    }
 </script>
 </html>
