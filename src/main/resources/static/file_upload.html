@@ -41,7 +41,7 @@
                 </nav>
 
                 <div class="sidebar-footer">
-                    <p class="copyright">© 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com </p>
+                    <p class="copyright">© 2020 文档共享系统. Design by sunyan@qq.com </p>
                 </div>
             </div>
 
@@ -250,8 +250,12 @@
                                             <select class="form-control" id="example-select" name="documentType"
                                                     size="1">
                                                 <option value="0">请选择</option>
-                                                <option value="1">PDF</option>
-                                                <option value="2">WORD</option>
+                                                <option value="1">pdf</option>
+                                                <option value="2">word</option>
+                                                <option value="3">excel</option>
+                                                <option value="4">ppt</option>
+                                                <option value="5">picture</option>
+                                                <option value="6">other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -292,11 +296,19 @@
                 var keyWord = document.getElementById("example-email-input").value;
                 var documentName = document.getElementById("example-text-input").value;
                 var documentType = document.getElementById("example-select").value;
+                var documentUrl = document.getElementById("example-file-input").files[0]
+                if (documentName == "" || keyWord == "" ) {
+                    alert("请填写基本信息");
+                } else if(documentType==0){
+                    alert("请选择类型！");
+                }else if(documentUrl == undefined){
+                    alert("请选择文件！");
+                }else{
                 var form = new FormData();
                 form.append("documentUrl", document.getElementById("example-file-input").files[0]);
                 form.append("userName", userName);
-                 form.append("documentName", documentName);
-                 form.append("keyWord", keyWord);
+                form.append("documentName", documentName);
+                form.append("keyWord", keyWord);
                 form.append("documentType", documentType);
                 //$(window).attr("location", "file_list.html");
                 $.ajax({
@@ -309,16 +321,16 @@
                     processData: false,
                     contentType: false,
                     success: function (data) {      //成功，回调函数
-                            alert("上传成功！");
-                       // $(window).attr("location", "index.html");
-                        window.location.href="file_list.html";
+                        alert("上传成功！");
+                        // $(window).attr("location", "index.html");
+                        window.location.href = "file_list.html";
                     },
                     error: function (res) {          //失败，回调函数
-                        let json=JSON.parse(res.responseText);
+                        let json = JSON.parse(res.responseText);
                         alert(json.message);
                     }
                 });
-
+            }
 
             })
 

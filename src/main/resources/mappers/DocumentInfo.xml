@@ -30,7 +30,7 @@
 
 
     <update id="editFileUpload" parameterType="com.bysj.fileshare.entity.vo.DocumentInfoVo">
-        UPDATE bysj_document_info set document_name=#{documentName},key_word=#{keyWord},document_type=#{documentType} WHERE id=#{id}
+        UPDATE bysj_document_info set document_name=#{documentName},key_word=#{keyWord} WHERE id=#{id}
 </update>
 
 

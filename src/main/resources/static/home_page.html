@@ -11,6 +11,26 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/materialdesignicons.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+  <style type="text/css">
+    .lock-container {
+      z-index: -999;
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("../images/lockLogin.png");
+      background-size: cover;
+    }
+    .welcomeTag{
+      position: absolute;
+      top: 20%;
+      right: 30%;
+      font-size: 20px;
+      color: #4DC1A4;
+    }
+  </style>
 </head>
   
 <body data-logobg="color_8" data-sidebarbg="color_8">
@@ -42,7 +62,7 @@
         </nav>
         
         <div class="sidebar-footer">
-          <p class="copyright">© 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com </p>
+          <p class="copyright">© 2020 文档共享系统. Design by sunyan@qq.com </p>
         </div>
       </div>
       
@@ -67,8 +87,8 @@
           <ul class="topbar-right">
             <li class="dropdown dropdown-profile">
               <a href="javascript:void(0)" data-toggle="dropdown">
-                <span class="mdi mdi-account-circle" ></span>
-                <span id ="loginUser"><span class="caret"></span></span>
+                <img class="img-avatar img-avatar-48 m-r-10" src="images/users/avatar.jpg" alt="管理员"/>
+                <span>管理员 <span class="caret"></span></span>
               </a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li> <a href="pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>
@@ -216,11 +236,13 @@
     <!--页面主要内容-->
     <main class="layout-content">
       
-      <div class="container-fluid">
-      欢迎使用文档共享管理系统
+        <div class="lock-container ">
+          <div class=" welcomeTag">
+          <div id="mazey"></div>
+          <div style="margin-top: 10px;" id="todayDate"></div>
+          </div>
+        </div>
 
-      </div>
-      
     </main>
     <!--End 页面主要内容-->
   </div>
@@ -235,7 +257,13 @@
 <script type="text/javascript" src="js/Chart.js"></script>
 <script type="text/javascript">
 $(document).ready(function(e) {
-
+    var myDate = new Date();
+    var year=myDate.getFullYear();        //获取当前年
+    var month=myDate.getMonth()+1;   //获取当前月
+    var date=myDate.getDate();            //获取当前日
+    var now=year+'年'+month+"月"+date+"日";
+    $("#mazey").html("欢迎您,孙燕");
+    $("#todayDate").html("今天是,"+now);
 });
 </script>
 </body>

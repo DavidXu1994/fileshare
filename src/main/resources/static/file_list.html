@@ -40,7 +40,7 @@
             </nav>
 
             <div class="sidebar-footer">
-                <p class="copyright">© 2020 文档共享系统 . All rights reserved | Design by sunyan@qq.com </p>
+                <p class="copyright">© 2020 文档共享系统. Design by sunyan@qq.com </p>
             </div>
         </div>
 
@@ -266,8 +266,7 @@
                                 <li><a href="#1">2</a></li>
                                 <li><a href="#1">3</a></li>
                                 <li class="disabled"><span>...</span></li>
-                                <li><a href="#!">14452</a></li>
-                                <li><a href="#!">14453</a></li>
+                                <li><a href="#!">10</a></li>
                                 <li><a href="#!">»</a></li>
                             </ul>
 
@@ -282,7 +281,7 @@
     </main>
     <!--End 页面主要内容-->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal fade" id="blogEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -291,14 +290,15 @@
                     <h4 class="modal-title" id="exampleModalLabel">新消息</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="editMessage">
+                        <input type="hidden" name="id">
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">文档名：</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <input type="text" class="form-control" id="recipient-name" name="documentName">
                         </div>
                         <div class="form-group">
                             <label for="message-name" class="control-label">关键字：</label>
-                            <input type="text" class="form-control" id="message-name">
+                            <input type="text" class="form-control" id="message-name" name="keyWord">
                         </div>
                         <!--<div class="form-group">
                             <label for="message-type" class="control-label">文档类型：</label>
@@ -345,7 +345,19 @@
                 //先清空表格
                 $('#tableFileList').find("tr").remove();
                 for (var i = 0; i < data.length; i++) {
-
+                        if(data[i].documentType==1){
+                            data[i].documentType="pdf";
+                        }else if(data[i].documentType==2){
+                            data[i].documentType="word";
+                        } else if(data[i].documentType==3){
+                            data[i].documentType="excel";
+                        }else if(data[i].documentType==4){
+                            data[i].documentType="ppt";
+                        }else if(data[i].documentType==5){
+                            data[i].documentType="picture";
+                        }else if(data[i].documentType==6){
+                            data[i].documentType="other";
+                        }
                     str += "<tr>" +
                         "<td>" + (i + 1) + "</td>" +
                         "<td>" + data[i].documentName + "</td>" +
@@ -357,11 +369,11 @@
                         " <button type='button' class='btn' onclick='downloadFile(" + data[i].id + ")' id='downloadOne'>下载</button>";
                     if (data[i].isOneSelf) {
                         //自己可以删自己
-                        str += " <button type='button' class='btn' data-toggle='modal' value=" + data[i].id + " data-target='#exampleModal' id='editOne' >编辑</button>" +
+                        str += " <button type='button' class='btn' data-toggle='modal' onclick='editFile(" + data[i].id + ")' data-target='#exampleModal' id='editOne' >编辑</button>" +
                             " <button type='button' class='btn' onclick='deleteFile(" + data[i].id + ")' id='deleteOne'>删除</button>";
                     } else {
                         //不可以删别人
-                        str += " <button type='button'  disabled='disabled' class='btn' data-toggle='modal' value=" + data[i].id + " data-target='#exampleModal' id='editOne' >编辑</button>" +
+                        str += " <button type='button'  disabled='disabled' class='btn' data-toggle='modal' onclick='editFile(" + data[i].id + ")' data-target='#exampleModal' id='editOne' >编辑</button>" +
                             " <button type='button' disabled='disabled' class='btn' onclick='deleteFile(" + data[i].id + ")' id='deleteOne'>删除</button>";
 
                     }
@@ -378,28 +390,45 @@
 
 
     <!--编辑文档 -->
-    //编辑提交
-    function editDocumentSubmit() {
-        var data = {
-            id: $("#blogEditModal input[name='id']").val(),
-            documentName: $("#blogEditModal input[name='documentName']").val(),
-            documentType: $("#blogEditModal input[name='documentType']").val(),
-            keyWord: $("#blogEditModal textarea[name='keyWord']").val()
-        };
+    //编辑弹框
+    function editFile(id) {
         $.ajax({
-            type: "POST",
-            url: "/file/upload/edit?id=" + data.id,
-            //dataType: "json",
+            type: "GET",
+            url: "/file/upload/byid/query?id="+id,
+            dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(data), //需要将对象转换为字符串提交
-            success: function () {
-                //新增后重新加载
-                viewBlogs();
-                //关闭弹窗
-                $('#blogEditModal').modal('hide');
+            success: function (res) {
+                console.log(res);
+                res=res.data;
+                //为编辑框赋值
+                $("#blogEditModal input[name='id']").val(res.id);
+                $("#blogEditModal input[name='documentName']").val(res.documentName);
+                $("#blogEditModal input[name='keyWord']").val(res.keyWord);
+                //显示编辑弹窗
+                $('#blogEditModal').modal('show');
             },
             error: function (err) {
                 console.log(err);
+            }
+        });
+    }
+    //编辑提交
+    function editDocumentSubmit() {
+        console.log($('#editMessage').serializeJSON());
+        $.ajax({
+            type: "post",
+            url: "/file/upload/edit",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify($('#editMessage').serializeJSON()),
+            success: function (res) {
+                //跳转到后台首页页面
+                //关闭弹窗
+                $('#blogEditModal').modal('hide');
+            },
+            error: function (res) {
+                let json=JSON.parse(res.responseText);
+                alert(json.message);
             }
         });
     }
