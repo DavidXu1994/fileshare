@@ -35,7 +35,8 @@ import org.springframework.web.servlet.config.annotation.*;
         // 添加拦截的请求，并排除几个不拦截的请求
         registry.addInterceptor(authTokenInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/favicon.ico","/css/**","/fonts/**","/images/**","/js/**")
-                .excludePathPatterns("/index.html","/signup.html", "/user/register", "/user/login");
+                .excludePathPatterns("/index.html","/signup.html", "/user/register", "/user/login")
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
 
 
